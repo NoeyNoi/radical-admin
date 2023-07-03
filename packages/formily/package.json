@@ -1,0 +1,23 @@
+{
+  "name": "@radical/formily",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "module": "index.ts",
+  "scripts": {
+    "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@formily/antdv-x3": "1.0.0-alpha.5",
+    "@formily/core": "^2.2.24",
+    "@formily/vue": "^2.2.24",
+    "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "@radical/types": "workspace:*",
+    "@radical/components": "workspace:*"
+  }
+}

@@ -1,0 +1,20 @@
+export enum HandlerSettingEnum {
+  CHANGE_LAYOUT,
+  // menu
+  MENU_ACCORDION,
+  MENU_TOP_ALIGN,
+  MENU_SHOW_SIDEBAR,
+
+  // header
+  HEADER_SHOW,
+
+  TABS_SHOW_QUICK,
+  TABS_SHOW_REDO,
+  TABS_SHOW,
+  TABS_SHOW_FOLD,
+
+  FULL_CONTENT,
+  SHOW_BREADCRUMB,
+  GRAY_MODE,
+  COLOR_WEAK,
+}

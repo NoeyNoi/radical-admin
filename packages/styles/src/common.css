@@ -1,0 +1,62 @@
+html {
+  overflow: hidden;
+  text-size-adjust: 100%;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: visible !important;
+  overflow-x: hidden !important;
+}
+* {
+  box-sizing: border-box;
+}
+
+a:focus,
+a:active,
+button,
+div,
+svg,
+span {
+  outline: none !important;
+}
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0 1000px white inset !important;
+}
+
+:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s !important;
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-thumb:vertical {
+  border-radius: 4px;
+  background: #e2e2e2;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #b6b7b9;
+}
+::-webkit-scrollbar-track {
+  background-color: rgb(0 0 0 / 5%);
+}
+
+/* app */
+#app {
+  width: 100%;
+  height: 100%;
+}
+/* 色弱模式 */
+body.color-weak {
+  filter: invert(80%);
+}
+/* 灰色模式 */
+body.gray-mode {
+  filter: grayscale(100%);
+  filter: progid:dximagetransform.microsoft.basicimage(grayscale=1);
+}

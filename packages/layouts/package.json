@@ -1,0 +1,23 @@
+{
+  "name": "@radical/layouts",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "module": "index.ts",
+  "license": "MIT",
+  "scripts": {
+    "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo"
+  },
+  "dependencies": {
+    "@radical/constants": "workspace:*",
+    "@radical/directives": "workspace:*",
+    "@radical/hooks": "workspace:*",
+    "@radical/locale": "workspace:*",
+    "@radical/router": "workspace:*",
+    "@radical/types": "workspace:*",
+    "@radical/utils": "workspace:*",
+    "@radical/stores": "workspace:*",
+    "@radical/components": "workspace:*",
+    "vue": "3.2.47",
+    "vue-router": "^4.1.6"
+  }
+}

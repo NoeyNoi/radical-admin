@@ -1,0 +1,14 @@
+:root {
+  /* 主题色 */
+  --primary-color: #1890ff;
+  /* 文本色 */
+  --text-color: rgba(0, 0, 0, 0.85);
+  /* 内容区域背景色 */
+  --layout-background: #f0f2f5;
+}
+
+:root[class='dark'] {
+  --primary-color: #177ddc;
+  --text-color: rgba(255, 255, 255, 0.85);
+  --layout-background: #1e1e1e;
+}

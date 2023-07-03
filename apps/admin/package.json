@@ -1,0 +1,59 @@
+{
+  "name": "@apps/admin",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NoeyNoi/admin.git",
+    "directory": "apps/admin"
+  },
+  "author": {
+    "name": "Noey",
+    "email": "3133192631@qq.com",
+    "url": "https://github.com/NoeyNoi"
+  },
+  "scripts": {
+    "build": "pnpm cross-env NODE_ENV=production vite build",
+    "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo",
+    "dev": "vite",
+    "preview": "npm run build && vite preview",
+    "preview:dist": "vite preview",
+    "report": "pnpm cross-env REPORT=true npm run build",
+    "server:br": "pnpx http-server dist --cors --brotli -c-1",
+    "server:gzip": "pnpx http-server dist --cors --gzip -c-1",
+    "type:check": "vue-tsc --noEmit --skipLibCheck"
+  },
+  "dependencies": {
+    "@radical/components": "workspace:*",
+    "@radical/constants": "workspace:*",
+    "@radical/directives": "workspace:*",
+    "@radical/hooks": "workspace:*",
+    "@radical/layouts": "workspace:*",
+    "@radical/locale": "workspace:*",
+    "@radical/request": "workspace:*",
+    "@radical/router": "workspace:*",
+    "@radical/stores": "workspace:*",
+    "@radical/styles": "workspace:*",
+    "@radical/utils": "workspace:*",
+    "@radical/formily": "workspace:*",
+    "@radical/table": "workspace:*",
+    "@iconify/iconify": "^3.1.0",
+    "dayjs": "^1.11.7",
+    "mockjs": "^1.1.0",
+    "naive-ui": "^2.34.3",
+    "pinia": "2.0.36",
+    "vue": "3.2.47",
+    "vue-demi": "^0.14.0",
+    "vue-router": "^4.1.6"
+  },
+  "devDependencies": {
+    "@config/css-preprocess": "workspace:*",
+    "@config/vite": "workspace:*",
+    "@radical/types": "workspace:*",
+    "@types/mockjs": "^1.0.7",
+    "@vue/compiler-sfc": "3.2.47",
+    "@vue/test-utils": "^2.3.2",
+    "typescript": "^5.0.4",
+    "vite": "4.3.1",
+    "vue-tsc": "^1.4.4"
+  }
+}

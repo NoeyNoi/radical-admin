@@ -1,0 +1,24 @@
+{
+  "name": "@radical/table",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@radical/request": "workspace:*",
+    "@radical/utils": "workspace:*",
+    "@radical/stores": "workspace:*",
+    "vue": "^3.2.47",
+    "vxe-table": "^4.4.3",
+    "xe-utils": "^3.5.7"
+  },
+  "devDependencies": {
+    "@radical/types": "workspace:*",
+    "sass": "^1.55.0"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "@radical/request",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "module": "index.ts",
+  "license": "MIT",
+  "scripts": {
+    "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo"
+  },
+  "dependencies": {
+    "@radical/locale": "workspace:*",
+    "@radical/types": "workspace:*",
+    "@radical/utils": "workspace:*",
+    "axios": "^1.3.1",
+    "qs": "^6.11.0"
+  },
+  "devDependencies": {
+    "@types/qs": "^6.9.7"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "name": "radical-admin-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "https://github.com/NoeyNoi",
+  "bugs": {
+    "url": "https://github.com/NoeyNoi/xxx/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NoeyNoi/admin.git"
+  },
+  "author": {
+    "name": "Noey",
+    "email": "3133192631@qq.com",
+    "url": "https://github.com/NoeyNoi"
+  },
+  "scripts": {
+    "bootstrap": "pnpm install --registry=https://registry.npmmirror.com/",
+    "build": "pnpm --filter scripts build",
+    "report": "pnpm --filter scripts report",
+    "clean": "pnpm turbo run clean && rimraf node_modules",
+    "dev": "pnpm --filter scripts dev",
+    "format": "pnpm run lint:eslint & pnpm run lint:stylelint & pnpm run lint:prettier",
+    "lint:eslint": "eslint . --cache --max-warnings 0 --fix",
+    "lint:stylelint": "stylelint --fix ",
+    "lint:prettier": "prettier --write  \"{packages,apps,configs,scripts}/**/*.{js,json,ts,tsx,css,less,scss,vue,html,md}\"",
+    "reinstall": "pnpm turbo run clean && rimraf pnpm-lock.yaml && rimraf node_modules && npm run bootstrap",
+    "postinstall": "pnpm run stub",
+    "stub": "pnpm --filter @config/** prepack",
+    "turbo:build": "turbo run build --parallel",
+    "turbo:report": "turbo run report --parallel",
+    "turbo:dev": "turbo run dev --parallel",
+    "turbo:preview": "turbo run preview --parallel",
+    "preinstall": "npx only-allow pnpm"
+  },
+  "resolutions": {
+    "bin-wrapper": "npm:bin-wrapper-china"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.26.1",
+    "@config/lint": "workspace:*",
+    "@types/fs-extra": "^11.0.1",
+    "@types/node": "^18.16.0",
+    "cross-env": "^7.0.3",
+    "esno": "^0.16.3",
+    "fs-extra": "^11.1.1",
+    "jsdom": "^21.1.1",
+    "pathe": "^1.1.0",
+    "rimraf": "^4.4.1",
+    "rollup": "^3.21.0",
+    "ts-node": "^10.9.1",
+    "tsconfig": "workspace:*",
+    "turbo": "^1.10.1",
+    "typescript": "^5.0.4",
+    "unbuild": "^1.2.1",
+    "less": "^4.1.3"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "packageManager": "pnpm@7.1.0",
+  "dependencies": {
+    "unocss": "^0.53.1",
+    "@ant-design/icons-vue": "^6.1.0",
+    "ant-design-vue": "^3.2.20",
+    "vite-plugin-mock": "^2.9.6"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "extends": "../../configs/tsconfig/base.json",
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "#/*": ["src/*"]
+    },
+    "outDir": "dist",
+    "lib": ["dom", "esnext"],
+    "types": ["vite/client", "@radical/types", "@radical/constants"]
+  },
+  "include": [
+    "src",
+    "mock",
+    "vite.config.ts",
+    "../../node_modules/.pnpm/vue@3.2.45/node_modules/vue/macros-global.d.ts"
+  ]
+}
