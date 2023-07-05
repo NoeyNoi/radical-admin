@@ -1,7 +1,7 @@
 # 参考文档 
 # https://docs.github.com/zh/actions/using-workflows/events-that-trigger-workflows
 # https://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html
-name: push
+name: 格式化代码
 
 # 当 master 分支 push 代码的时候触发 workflow
 on:
