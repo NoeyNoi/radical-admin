@@ -38,7 +38,6 @@ import { MenuModeEnum, MenuTypeEnum, REDIRECT_NAME } from '@radical/constants'
 import { useOpenKeys } from './useOpenKeys'
 import { RouteLocationNormalizedLoaded, useRouter } from 'vue-router'
 import { isFunction } from '@radical/utils'
-import { useDesign } from '@radical/hooks'
 import { basicProps } from './props'
 import {
   listenerRouteChange,
@@ -66,7 +65,7 @@ export default defineComponent({
       collapsedOpenKeys: [],
     })
 
-    const { prefixCls } = useDesign('basic-menu')
+    const prefixCls = 'basic-menu'
     const { items, mode } = toRefs(props)
 
     const { getCollapsed, getTopMenuAlign } = useMenuSetting()

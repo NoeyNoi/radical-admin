@@ -5,15 +5,15 @@ export default defineComponent({
   name: 'AppProvider',
   inheritAttrs: false,
   props: {
-    prefixCls: {
+    test: {
       type: String,
-      default: 'main',
+      default: 'test str',
     },
   },
   setup(props, { slots }) {
-    const { prefixCls } = toRefs(props)
-    // 将 prefixCls 注入到全局
-    createAppProviderContext({ prefixCls })
+    const { test } = toRefs(props)
+    // 将 test 注入到全局
+    createAppProviderContext({ test })
 
     return () => slots.default?.()
   },

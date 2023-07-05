@@ -9,7 +9,7 @@ import {
   LayoutSider,
   LayoutHeader,
   LayoutContent,
-  Card
+  Card,
 } from 'ant-design-vue'
 
 import { useMenuSetting } from '@radical/hooks'
@@ -52,7 +52,7 @@ const { getDarkMode } = storeToRefs(useConfigStore())
           :style="mainStyle"
           class="overflow-auto pt-8px pl-8px"
         >
-          <Card :body-style="{ height: '100%', padding: '4px'}">
+          <Card :body-style="{ height: '100%', padding: '4px' }">
             <MainSet>
               <slot name="main"></slot>
             </MainSet>

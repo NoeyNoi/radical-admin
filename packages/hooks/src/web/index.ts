@@ -1,6 +1,5 @@
 export * from '../context/useAppContext'
 export * from './useCopyToClipboard'
-export * from './useDesign'
 export * from './useFullContent'
 export * from './useMessage'
 export * from './useTitle'

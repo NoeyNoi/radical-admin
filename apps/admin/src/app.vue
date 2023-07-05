@@ -4,7 +4,6 @@ import { AppProvider } from '@radical/components'
 import { useWebTitle } from '@radical/hooks'
 import { REDIRECT_NAME } from '@radical/constants'
 import { getGlobalConfig, computedAsync } from '@radical/utils'
-import { namespace } from './setting/design'
 
 import { useLocale } from '@radical/locale'
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
@@ -51,7 +50,7 @@ const locale = computedAsync(async () => {
 
 <template>
   <ConfigProvider :locale="locale" :prefixCls="getDarkMode">
-    <AppProvider :prefix-cls="namespace">
+    <AppProvider>
       <router-view />
     </AppProvider>
   </ConfigProvider>

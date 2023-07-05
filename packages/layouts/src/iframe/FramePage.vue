@@ -1,10 +1,9 @@
 <template>
-  <div :class="prefixCls" style="height: 100%">
+  <div class="iframe-page" style="height: 100%">
     <Spin :spinning="loading" size="large">
       <iframe
         id="iframeContent"
         :src="frameSrc"
-        :class="`${prefixCls}`"
         ref="frameRef"
         allow=""
         @load="hideLoading"
@@ -15,7 +14,6 @@
 <script lang="ts" setup name="FrameLayout">
 import { ref } from 'vue'
 import { Spin } from 'ant-design-vue'
-import { useDesign } from '@radical/hooks'
 
 defineProps({
   frameSrc: {
@@ -26,7 +24,6 @@ defineProps({
 
 const loading = ref(true)
 const frameRef = ref<HTMLElement>()
-const { prefixCls } = useDesign('iframe-page')
 function hideLoading() {
   loading.value = false
 }

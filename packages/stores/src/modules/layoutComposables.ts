@@ -47,6 +47,6 @@ export const useComosables = () => {
     omitContentHeight,
     headerStyle,
     contentStyle,
-    mainStyle
+    mainStyle,
   }
 }
