@@ -34,7 +34,7 @@ export async function createViteConfig(
     VITE_USE_MOCK,
     VITE_DROP_CONSOLE,
     VITE_USE_HTTPS,
-    VITE_PORT
+    VITE_PORT,
   } = viteEnv
 
   // 通用配置

@@ -1,6 +1,7 @@
 ---
 title: 开始
 icon: vaadin:start-cog
+order: 2
 category:
   - 使用指南
 ---

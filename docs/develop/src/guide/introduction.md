@@ -1,6 +1,7 @@
 ---
 title: 介绍
 icon: ph:info-bold
+order: 1
 category:
   - 使用指南
 ---

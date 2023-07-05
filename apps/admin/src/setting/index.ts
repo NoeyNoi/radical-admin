@@ -6,7 +6,7 @@ import {
   PermissionModeEnum,
   SessionTimeoutProcessingEnum,
   SettingButtonPositionEnum,
-  ThemeEnum
+  ThemeEnum,
 } from '@radical/constants'
 
 // 默认主题

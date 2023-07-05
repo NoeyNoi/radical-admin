@@ -1,6 +1,7 @@
 ---
 title: 项目配置
 icon: uil:setting
+order: 3
 category:
   - 使用指南
 ---
