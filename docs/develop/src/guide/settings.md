@@ -5,7 +5,7 @@ category:
   - 使用指南
 ---
 
-用于修改项目的配色、布局、缓存、多语言、组件默认配置
+用于修改项目的布局、缓存、多语言、组件默认配置
 
 ## 环境变量配置
 环境变量配置位于各项目（`apps/*`）根目录下的 `.env`、`.env.development`、`.env.production`文件中
@@ -126,7 +126,7 @@ window.__PRODUCTION__RADICAL_ADMIN__CONF__ = {
 `_app.config.js` 用于项目在打包后，需要动态修改配置的需求，如接口地址。不用重新进行打包，可在打包后修改 `/dist/_app.config.js` 内的变量，刷新即可更新代码内的局部变量。
 
 ### 如何获取全局变量
-想要获取 `_app.config.js` 内的变量，可以使用 [packages/utils/src/config.ts](xxxxxxx:github) 提供的 `getGlobalConfig` 函数来进行获取
+想要获取 `_app.config.js` 内的变量，可以使用 [packages/utils/src/config.ts](https://github.com/NoeyNoi/radical-admin/blob/main/packages/utils/src/config.ts) 提供的 `getGlobalConfig` 函数来进行获取
 ```js
 import { getGlobalConfig } from '@radical/utils'
 
@@ -136,7 +136,7 @@ const { title } = getGlobalConfig(import.meta.env)
 ### 如何新增(新增一个可动态修改的配置项)
 1. 首先在 `.env` 或者对应的开发环境配置文件内，新增需要可动态配置的变量，需要以 `VITE_GLOB_`开头
 2. `VITE_GLOB_` 开头的变量会自动加入环境变量，通过在 `packages/types/shims/src/config.ts` 内修改 `GlobEnvConfig` 和 `GlobConfig` 两个环境变量的值来定义新添加的类型
-3. [packages/utils/src/config.ts](xxxxxxx:github) `getGlobalConfig` 函数中添加刚新增的返回值即可
+3. [packages/utils/src/config.ts](https://github.com/NoeyNoi/radical-admin/blob/main/packages/utils/src/config.ts) `getGlobalConfig` 函数中添加刚新增的返回值即可
 
 ```ts
 export function getGlobalConfig(
@@ -159,7 +159,7 @@ export function getGlobalConfig(
 :::
 
 ### 配置文件路径
-[apps/xxx/src/setting/project.ts](xxx)
+[apps/xxx/src/setting/index.ts](https://github.com/NoeyNoi/radical-admin/blob/main/apps/admin/src/setting/index.ts)
 
 ### 说明
 
@@ -253,7 +253,7 @@ export const projectSetting: ProjectConfig = {
 
 用于配置多语言信息，如果你的项目不需要国际化，请删除相关逻辑，这也有助于提升性能
 
-在 [packages/locale/src/config.ts](xxxx) 内配置
+在 [packages/locale/src/config.ts](https://github.com/NoeyNoi/radical-admin/blob/main/packages/locale/src/config.ts) 内配置
 
 ```ts
 export const LOCALE: { [key: string]: LocaleType } = {
@@ -283,7 +283,7 @@ export const localeSetting: LocaleConfig = {
 ```
 
 ::: tip 提示
-开发时，只需在 `packages/locale/src/lang/xx` 配置对应的语言映射即可
+开发时，只需在 [`packages/locale/src/lang/xx`](https://github.com/NoeyNoi/radical-admin/tree/main/packages/locale/src/lang) 配置对应的语言映射即可
 
 业务逻辑按照如下方式使用
 ```ts
