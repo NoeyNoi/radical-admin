@@ -3,24 +3,27 @@ import { defineStore } from '@radical/stores'
 import { BASIC_HOME_PATH } from '@radical/constants'
 import { router } from '@radical/router'
 import { doLogin } from '@/apis/auth'
-import { IUserInfo, IRoleInfo } from '@radical/types'
+import { IUserInfo } from '@radical/types'
 
 interface UserState {
   userInfo: Nullable<IUserInfo>
-  roles: IRoleInfo[]
+  roles: string[]
 }
 
 export const useUserStore = defineStore('app-user-store', {
   state: (): UserState => ({
     userInfo: null,
-    // TODO: 按照不同的角色处理页面权限或功能权限
+    /**
+     * 该字段主要用于结合路由meta字段上的role做判断
+     * => 用户是否拥有对应路由权限
+     */
     roles: [],
   }),
   getters: {
     getUserInfo(): IUserInfo | null {
       return this.userInfo
     },
-    getRoles(): IRoleInfo[] {
+    getRoles(): string[] {
       return this.roles.length > 0 ? this.roles : []
     },
   },
@@ -28,7 +31,7 @@ export const useUserStore = defineStore('app-user-store', {
     setUserInfo(info: IUserInfo | null) {
       this.userInfo = info
     },
-    setRoles(roles: IRoleInfo[]) {
+    setRoles(roles: string[]) {
       this.roles = roles
     },
     async login(

@@ -1,7 +1,7 @@
 import { useUserStoreWithout } from '@/store/user'
 import { useAuthStoreWithout } from '@/store/auth'
 import {
-  initGuard,
+  initStoreForGuard,
   createAuthGuard,
   createTabsGuard,
   createParamMenuGuard,
@@ -16,7 +16,7 @@ async function setupRouteGuard() {
     userStore,
     authStore,
   }
-  initGuard(stores)
+  initStoreForGuard(stores)
   createAuthGuard(PAGE_NOT_FOUND_ROUTE)
   createTabsGuard(setRouteChange)
   // 必须在createPermissionGuard之后 (菜单已创建)

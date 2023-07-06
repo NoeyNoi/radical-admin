@@ -51,7 +51,7 @@ const locale = computedAsync(async () => {
 <template>
   <ConfigProvider :locale="locale" :prefixCls="getDarkMode">
     <AppProvider>
-      <router-view />
+      <RouterView />
     </AppProvider>
   </ConfigProvider>
 </template>

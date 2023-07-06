@@ -179,20 +179,17 @@ export default defineComponent({
 </script>
 <style lang="less">
 .dark-menu,
-.light-menu,
-.ant-menu {
+.light-menu {
   // 阻止滚动链接，滚动不会传播给祖先
   overscroll-behavior: contain;
   // 优化图表居中显示
   .dark-menu-submenu-title,
-  .light-menu-submenu-title,
-  .ant-menu-submenu-title {
+  .light-menu-submenu-title {
     display: flex !important;
     align-items: center !important;
   }
-  &.dark-menu-horizontal,
-  &.light-menu-horizontal,
-  &.ant-menu-horizontal {
+  &__dark-menu-horizontal,
+  &__light-menu-horizontal {
     border-bottom: none;
   }
 }

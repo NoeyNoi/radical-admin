@@ -11,7 +11,7 @@ const whitePathList: string[] = [LOGIN_PATH]
 export function createAuthGuard(PAGE_NOT_FOUND_ROUTE) {
   const { authStore } = stores
   router.beforeEach(async (to, from, next) => {
-    // 白名单
+    // 白名单 或 忽略鉴权的路由
     if (whitePathList.includes(to.path as PageEnum) || to.meta.ignoreAuth) {
       next()
       return

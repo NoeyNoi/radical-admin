@@ -1,8 +1,8 @@
-import { DefineAppConfigOptions } from '@radical/types'
 import { PermissionModeEnum } from '@radical/constants'
-import { useAppConfig } from '@radical/stores'
+import { useConfigStoreWithOut } from '@radical/stores'
 import { _assign } from '@radical/utils'
 import { createRouter, createWebHashHistory, Router } from 'vue-router'
+import { unref } from 'vue'
 export * from './helper'
 export * from './guard'
 export * from './menus'
@@ -11,7 +11,6 @@ export * from './mitt/routeChange'
 export interface Stores {
   userStore?: any
   authStore?: any
-  appConfig?: DefineAppConfigOptions
 }
 
 export const stores: Stores = {}
@@ -56,14 +55,14 @@ export function resetRouter() {
     }
   })
 }
-
-export function initGuard(s: Stores) {
+// 初始化守卫依赖的store
+export function initStoreForGuard(s: Stores) {
   _assign(stores, s)
-  stores.appConfig = useAppConfig()
 }
 
 export const getPermissionMode = () => {
-  return stores.appConfig?.permissionMode
+  const configStore = useConfigStoreWithOut()
+  return unref(configStore.getProjectConfig.permissionMode)
 }
 
 export const isRouteMappingMode = () => {

@@ -30,13 +30,11 @@ function hideLoading() {
 </script>
 <style lang="less" scoped>
 :deep(.dark-spin-nested-loading),
-:deep(.light-spin-nested-loading),
-:deep(.ant-spin-nested-loading) {
+:deep(.light-spin-nested-loading) {
   position: relative;
   height: 100%;
   .dark-spin-container,
-  .light-spin-container,
-  .ant-spin-container {
+  .light-spin-container {
     width: 100%;
     height: 100%;
   }

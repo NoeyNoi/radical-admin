@@ -1,16 +1,13 @@
-import { defineStore } from '@radical/stores'
+import { defineStore, useConfigStoreWithOut } from '@radical/stores'
 import { filterTree } from '@radical/utils'
 import { Menu } from '@radical/types'
 import { useUserStore } from './user'
 import { toRaw, unref } from 'vue'
 import { PermissionModeEnum, PageEnum } from '@radical/constants'
 import { flatMultiLevelRoutes, transformRouteToMenu } from '@radical/router'
-import { useAppConfig } from '@radical/stores'
 import { asyncRoutes } from '@/router/routes'
 
 interface AuthState {
-  // 权限 code 列表
-  permCodeList: string[] | number[]
   // 是否已动态添加路由
   isDynamicAddedRoute: boolean
   // 触发菜单更新
@@ -21,15 +18,11 @@ interface AuthState {
 
 export const useAuthStore = defineStore('app-auth-store', {
   state: (): AuthState => ({
-    permCodeList: [],
     isDynamicAddedRoute: false,
     lastBuildMenuTime: 0,
     frontMenuList: [],
   }),
   getters: {
-    getPermCodeList(): string[] | number[] {
-      return this.permCodeList
-    },
     getFrontMenuList(): Menu[] {
       return this.frontMenuList
     },
@@ -41,9 +34,6 @@ export const useAuthStore = defineStore('app-auth-store', {
     },
   },
   actions: {
-    setPermCodeList(codeList: string[]) {
-      this.permCodeList = codeList
-    },
     setFrontMenuList(list: Menu[]) {
       this.frontMenuList = list
     },
@@ -52,19 +42,18 @@ export const useAuthStore = defineStore('app-auth-store', {
     },
     resetState(): void {
       this.isDynamicAddedRoute = false
-      this.permCodeList = []
       this.lastBuildMenuTime = 0
     },
     async buildRoutesAction(): Promise<RouteRecordItem[]> {
       // const { t } = useI18n()
-      const appConfig = useAppConfig()
+      const configStore = useConfigStoreWithOut()
       const userStore = useUserStore()
 
       let routes: RouteRecordItem[] = []
       const roleList = toRaw(userStore.getRoles) || []
-      const permissionMode = unref(appConfig.permissionMode)
+      const permissionMode = unref(configStore.getProjectConfig.permissionMode)
 
-      // 根据 meta.roles 过滤路由
+      // 根据 meta.roles 结合 roleList 过滤掉无权限路由
       const routeFilter = (route: RouteRecordItem) => {
         const { meta } = route
         const { roles } = meta || {}
@@ -120,7 +109,7 @@ export const useAuthStore = defineStore('app-auth-store', {
           routes = filterTree(asyncRoutes, routeFilter)
           routes = routes.filter(routeFilter)
           // 相比ROLE模式，多了菜单自动生成
-          const menuList = transformRouteToMenu(routes, true)
+          const menuList = transformRouteToMenu(routes)
           routes = filterTree(routes, routeRemoveIgnoreFilter)
           routes = routes.filter(routeRemoveIgnoreFilter)
           // 菜单排序

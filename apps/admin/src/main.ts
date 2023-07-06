@@ -1,5 +1,4 @@
 import '@radical/styles'
-// import 'ant-design-vue/dist/antd.variable.css'
 import App from './app.vue'
 import { createApp } from 'vue'
 import { InitRouter } from '@radical/router'
@@ -10,10 +9,6 @@ import { initApplication } from './init-application'
 import { BasicRoutes } from './router/routes'
 import { setupTable } from '@radical/table'
 
-// 开发环境加载ant样式
-// if (import.meta.env.DEV) {
-//   import('ant-design-vue/es/style')
-// }
 ;(async () => {
   const app = createApp(App)
   // 初始化pinia

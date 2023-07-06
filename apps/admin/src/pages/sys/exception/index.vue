@@ -125,7 +125,7 @@ export default defineComponent({
 
       return (
         <Result
-          class={bem() + ' m-4'}
+          class={bem() + 'm-4'}
           status={status as any}
           title={props.title || title}
           subTitle={props.subTitle || subTitle}
@@ -144,14 +144,13 @@ export default defineComponent({
   },
 })
 </script>
-<style lang="less">
+<style lang="less" scoped>
 .app-exception-page {
   display: flex;
   align-items: center;
   flex-direction: column;
   .light-result-icon,
-  .dark-result-icon,
-  .ant-result-icon {
+  .dark-result-icon {
     img {
       max-width: 400px;
       max-height: 300px;

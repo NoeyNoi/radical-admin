@@ -14,11 +14,10 @@ export function getAllParentPath<T = Recordable<any>>(
 function joinParentPath(menus: RouteRecordItem[], parentPath = '') {
   for (let index = 0; index < menus.length; index++) {
     const menu = menus[index]
-    // https://next.router.vuejs.org/guide/essentials/nested-routes.html
-    // 以/开头的嵌套路径将被视为根路径。
-    // 允许在不使用嵌套URL的情况下利用组件嵌套。
+    // https://router.vuejs.org/zh/guide/essentials/nested-routes.html
+    // 注意，以 / 开头的嵌套路径将被视为根路径。这允许你利用组件嵌套，而不必使用嵌套的 URL
     if (!(menu.path.startsWith('/') || isUrl(menu.path))) {
-      // path doesn't start with /, nor is it a url, join parent path
+      // 路径不是以/开头，也不是url，则添加到父级path
       menu.path = `${parentPath}/${menu.path}`
     }
     if (menu?.children?.length) {
@@ -39,22 +38,22 @@ export function transformMenuModule(menuModule: MenuModule): Menu {
   joinParentPath(menuList as RouteRecordItem[])
   return menuList[0]
 }
-
+// 从route配置生成菜单
 export function transformRouteToMenu(
-  routeModList: RouteRecordItem[],
-  routerMapping = false,
+  routeModList: RouteRecordItem[]
 ) {
   const cloneRouteModList = cloneDeep(routeModList)
   const routeList: RouteRecordItem[] = []
 
   cloneRouteModList.forEach((item) => {
+    // 当隐藏子菜单时，重定向到指定路由
     if (
-      routerMapping &&
       item.meta?.hideChildrenInMenu &&
       typeof item.redirect === 'string'
     ) {
       item.path = item.redirect
     }
+    // 单个显示
     if (item.meta?.single) {
       const realItem = item?.children?.[0]
       realItem && routeList.push(realItem)

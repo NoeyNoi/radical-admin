@@ -2,19 +2,19 @@ import type { RouteLocationNormalized, Router } from 'vue-router'
 
 import { useRouter } from 'vue-router'
 import { unref } from 'vue'
-import { useMultipleTab, useAppConfig } from '@radical/stores'
+import { useMultipleTab } from '@radical/stores'
 import { TabActionEnum } from '@radical/constants'
 import { useRedo } from './usePage'
+import { useMultipleTabSetting } from '../appSetting'
 
 export function useTabs(_router?: Router) {
-  const appStore = useAppConfig()
+  const { getShowMultipleTab } = useMultipleTabSetting()
 
   function canIUseTabs(): boolean {
-    const { show } = appStore.tabTar
-    if (!show) {
+    if (!unref(getShowMultipleTab)) {
       throw new Error('标签页未打开，请于 settings 中打开！')
     }
-    return !!show
+    return !!unref(getShowMultipleTab)
   }
 
   const tabStore = useMultipleTab()

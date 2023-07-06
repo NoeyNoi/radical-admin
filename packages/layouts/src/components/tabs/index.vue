@@ -193,16 +193,13 @@ const handleClose = (e: PointerEvent, route: RouteLocationNormalized) => {
           left: -16px;
         }
         .dark-tabs-tab-active:after,
-        .light-tabs-tab-active:after,
-        .ant-tabs-tab-active:after {
+        .light-tabs-tab-active:after {
           right: -16px;
         }
         .dark-tabs-tab:nth-last-child(2):after,
         .dark-tabs-tab:nth-last-child(2) > div:after,
         .light-tabs-tab:nth-last-child(2):after,
-        .light-tabs-tab:nth-last-child(2) > div:after,
-        .ant-tabs-tab:nth-last-child(2):after,
-        .ant-tabs-tab:nth-last-child(2) > div:after {
+        .light-tabs-tab:nth-last-child(2) > div:after {
           display: none;
         }
       }

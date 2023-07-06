@@ -68,14 +68,14 @@ export interface SporadicSetting {
   // 切换界面的时候是否取消已经发送但是未响应的http请求。
   // 如果开启,想对单独接口覆盖。可以在单独接口设置
   removeAllHttpPending: boolean
-  // 权限相关信息的存储位置
-  permissionCacheType: CacheTypeEnum
   // 是否显示设置按钮
   showSettingButton: boolean
   // 是否显示主题切换按钮
   showDarkModeToggle: boolean
   // 设置按钮位置 可选项，AUTO: 自动选择；HEADER: 位于头部；FIXED: 固定在右侧
   settingButtonPosition: SettingButtonPositionEnum
+  // 权限相关信息的存储位置
+  permissionCacheType: CacheTypeEnum
   // 权限模式,默认前端角色权限模式
   // ROUTE_MAPPING: 前端模式（菜单由路由生成，默认）
   // ROLE：前端模式（菜单路由分开）
