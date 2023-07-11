@@ -7,7 +7,6 @@
     :openKeys="getOpenKeys"
     :inlineIndent="inlineIndent"
     @open-change="handleOpenChange"
-    :class="getMenuClass"
     @click="handleMenuClick"
     :subMenuOpenDelay="0.2"
     :style="getMenuStyle"
@@ -23,28 +22,20 @@
 </template>
 <script lang="ts">
 import type { MenuState } from './types'
-import {
-  computed,
-  defineComponent,
-  unref,
-  reactive,
-  watch,
-  toRefs,
-  ref,
-} from 'vue'
+import { computed, defineComponent, unref, reactive, toRefs, ref } from 'vue'
 import { Menu as AMenu } from 'ant-design-vue'
 import BasicSubMenuItem from './components/BasicSubMenuItem.vue'
-import { MenuModeEnum, MenuTypeEnum, REDIRECT_NAME } from '@radical/constants'
+import { MenuModeEnum, REDIRECT_NAME } from '@radical/constants'
 import { useOpenKeys } from './useOpenKeys'
 import { RouteLocationNormalizedLoaded, useRouter } from 'vue-router'
-import { isFunction } from '@radical/utils'
 import { basicProps } from './props'
 import {
   listenerRouteChange,
   getCurrentParentPath,
   getAllParentPath,
 } from '@radical/router'
-import { useMenuSetting } from '@radical/hooks'
+import { useGo, useMenuSetting } from '@radical/hooks'
+import { isUrl, openWindow } from '@radical/utils'
 
 export default defineComponent({
   name: 'BasicMenu',
@@ -54,10 +45,7 @@ export default defineComponent({
   },
   props: basicProps,
   emits: ['menuClick'],
-  setup(props, { emit }) {
-    const isClickGo = ref(false)
-    const currentActiveMenu = ref('')
-
+  setup(props) {
     const menuState = reactive<MenuState>({
       defaultSelectedKeys: [],
       openKeys: [],
@@ -65,43 +53,19 @@ export default defineComponent({
       collapsedOpenKeys: [],
     })
 
-    const prefixCls = 'basic-menu'
-    const { items, mode } = toRefs(props)
-
     const { getCollapsed, getTopMenuAlign } = useMenuSetting()
+    const getShowTitle = computed(() => {
+      return !unref(getCollapsed)
+    })
 
     const { currentRoute } = useRouter()
-
+    const { items, mode } = toRefs(props)
     const { handleOpenChange, setOpenKeys, getOpenKeys } = useOpenKeys(
       menuState,
       items,
       mode as any,
     )
 
-    const getShowTitle = computed(() => {
-      return !unref(getCollapsed)
-    })
-
-    const getIsTopMenu = computed(() => {
-      const { type, mode } = props
-
-      return (
-        (type === MenuTypeEnum.TOP_MENU && mode === MenuModeEnum.HORIZONTAL) ||
-        props.isHorizontal
-      )
-    })
-
-    const getMenuClass = computed(() => {
-      const align = props.isHorizontal && unref(getTopMenuAlign)
-      return [
-        prefixCls,
-        `justify-${align}`,
-        {
-          [`${prefixCls}__second`]: !props.isHorizontal,
-          [`${prefixCls}__sidebar-hor`]: unref(getIsTopMenu),
-        },
-      ]
-    })
     const getMenuStyle = computed(() => {
       const { mode } = props
       return mode === MenuModeEnum.HORIZONTAL
@@ -115,6 +79,19 @@ export default defineComponent({
         : {}
     })
 
+    const isClickGo = ref(false)
+    const go = useGo()
+    async function handleMenuClick({ key }) {
+      if (isUrl(key)) {
+        openWindow(key)
+        return
+      }
+      go(key)
+      isClickGo.value = true
+      menuState.selectedKeys = [key]
+    }
+
+    const currentActiveMenu = ref('')
     listenerRouteChange((route) => {
       if (route.name === REDIRECT_NAME) return
       handleMenuChange(route)
@@ -126,27 +103,8 @@ export default defineComponent({
       }
     })
 
-    !props.mixSider &&
-      watch(
-        () => props.items,
-        () => {
-          handleMenuChange()
-        },
-      )
-
-    async function handleMenuClick({ key }) {
-      const { beforeClickFn } = props
-      if (beforeClickFn && isFunction(beforeClickFn)) {
-        const flag = await beforeClickFn(key)
-        if (!flag) return
-      }
-      emit('menuClick', key)
-
-      isClickGo.value = true
-      menuState.selectedKeys = [key]
-    }
-
     async function handleMenuChange(route?: RouteLocationNormalizedLoaded) {
+      // 外部链接
       if (unref(isClickGo)) {
         isClickGo.value = false
         return
@@ -168,7 +126,6 @@ export default defineComponent({
     return {
       handleMenuClick,
       getShowTitle,
-      getMenuClass,
       getMenuStyle,
       handleOpenChange,
       getOpenKeys,
@@ -182,7 +139,7 @@ export default defineComponent({
 .light-menu {
   // 阻止滚动链接，滚动不会传播给祖先
   overscroll-behavior: contain;
-  // 优化图表居中显示
+  // 优化图标居中显示
   .dark-menu-submenu-title,
   .light-menu-submenu-title {
     display: flex !important;

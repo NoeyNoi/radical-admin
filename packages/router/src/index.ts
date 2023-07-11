@@ -65,9 +65,6 @@ export const getPermissionMode = () => {
   return unref(configStore.getProjectConfig.permissionMode)
 }
 
-export const isRouteMappingMode = () => {
-  return getPermissionMode() === PermissionModeEnum.ROUTE_MAPPING
-}
 export const isRoleMode = () => {
   return getPermissionMode() === PermissionModeEnum.ROLE
 }

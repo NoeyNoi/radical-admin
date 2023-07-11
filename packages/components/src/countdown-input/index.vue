@@ -64,11 +64,10 @@ const slotKeys = computed(() => {
 <style lang="less">
 .count-down-input {
   .dark-input-group-addon,
-  .light-input-group-addon{
+  .light-input-group-addon {
     padding-right: 0;
     background-color: transparent;
     border: none;
-
     button {
       font-size: 14px;
     }

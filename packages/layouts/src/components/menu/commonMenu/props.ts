@@ -22,11 +22,7 @@ export const basicProps = {
     type: String as PropType<MenuTypeEnum>,
     default: MenuTypeEnum.MIX,
   },
-  mixSider: Boolean,
   isHorizontal: Boolean,
-  beforeClickFn: {
-    type: Function as PropType<(key: string) => Promise<boolean>>,
-  },
 }
 
 export const itemProps = {

@@ -116,6 +116,7 @@ export const useAuthStore = defineStore('app-auth-store', {
           menuList.sort((a, b) => {
             return (a.meta?.orderNo || 0) - (b.meta?.orderNo || 0)
           })
+          // menuList 和 真正的路由会有区别，在超过2级路由时，超过2级在routes中不会再有children字段
           this.setFrontMenuList(menuList as Menu[])
           // 将多级路由转换为二级路由
           routes = flatMultiLevelRoutes(routes)

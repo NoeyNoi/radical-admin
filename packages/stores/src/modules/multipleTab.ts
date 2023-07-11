@@ -78,7 +78,7 @@ export const useMultipleTab = defineStore({
 
       for (const tab of this.tabList) {
         const item = getRawRoute(tab)
-        // Ignore the cache
+        // 根据ignoreKeepAlive配置忽略对应的缓存
         const needCache = !item.meta.ignoreKeepAlive
         if (!needCache) {
           continue

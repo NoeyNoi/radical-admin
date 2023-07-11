@@ -8,6 +8,7 @@ import { omit, cloneDeep } from '@radical/utils'
 export function flatMultiLevelRoutes(routeModules: RouteRecordItem[]) {
   const modules: RouteRecordItem[] = cloneDeep(routeModules)
   for (let index = 0; index < modules.length; index++) {
+    // 这里是一个引用，routeModule的改变最终会反应到modules上
     const routeModule = modules[index]
     if (!isMultipleRoute(routeModule)) {
       continue
@@ -40,7 +41,7 @@ function isMultipleRoute(routeModule: RouteRecordItem) {
   return flag
 }
 
-// 提升路由等级
+// 转换路由，将多级路由转为二级路由
 function promoteRouteLevel(routeModule: RouteRecordItem) {
   // 使用 vue-router 分割菜单
   let router: Router | null = createRouter({
@@ -65,6 +66,7 @@ function addToChildren(
 ) {
   for (let index = 0; index < children.length; index++) {
     const child = children[index]
+    // 找到二级根路由
     const route = routes.find((item) => item.name === child.name)
     if (!route) {
       continue
@@ -78,4 +80,3 @@ function addToChildren(
     }
   }
 }
-

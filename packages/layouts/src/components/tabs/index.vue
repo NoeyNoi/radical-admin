@@ -2,8 +2,8 @@
 import { Tabs, TabPane, Space } from 'ant-design-vue'
 import { Iconify } from '@radical/components'
 import type { RouteLocationNormalized, RouteMeta } from 'vue-router'
-import { Sortable } from '@radical/utils'
 import { useRouter } from 'vue-router'
+import { Sortable } from '@radical/utils'
 import { computed, nextTick, ref, unref } from 'vue'
 import { useI18n } from '@radical/locale'
 import { REDIRECT_NAME } from '@radical/constants'
@@ -14,22 +14,21 @@ import FoldButton from './components/FoldButton.vue'
 import { useMultipleTab, storeToRefs, useConfigStore } from '@radical/stores'
 import { listenerRouteChange } from '@radical/router'
 import { useMultipleTabSetting } from '@radical/hooks'
+
 const { getShowQuick, getShowRedo, getShowFold } = useMultipleTabSetting()
-const { close } = useTabs()
 const { t } = useI18n()
+
+const router = useRouter()
 const multipleTabStore = useMultipleTab()
 const { getTabList } = storeToRefs(multipleTabStore)
-const router = useRouter()
-const go = useGo()
-
-const activeTabName = ref<string>('')
-
+// 获取tablist并过滤掉设置隐藏的tab
 const tabList = computed(() => {
   return unref(getTabList).filter(
-    (item) => !item.meta?.hideTab && router.hasRoute(item.name),
+    (item) => !item.meta?.hideTab && router.hasRoute(item?.name),
   )
 })
 
+const activeTabName = ref<string>('')
 listenerRouteChange((route) => {
   const { name } = route
   if (name === REDIRECT_NAME || !route) {
@@ -57,9 +56,12 @@ listenerRouteChange((route) => {
     multipleTabStore.checkTab(unref(route))
   }
 })
+
+const go = useGo()
 const handleChange = (value: string) => {
   go(value, false)
 }
+
 //监听是否暗黑模式，动态修改html的class标识
 const { getDarkMode } = storeToRefs(useConfigStore())
 // 获取tabs内dom设置tabs页签拖拽排序
@@ -70,6 +72,7 @@ nextTick(() => {
   new Sortable(selection)
 })
 
+const { close } = useTabs()
 const handleClose = (e: PointerEvent, route: RouteLocationNormalized) => {
   e.stopPropagation()
   close(route)
@@ -123,6 +126,7 @@ const handleClose = (e: PointerEvent, route: RouteLocationNormalized) => {
   </Tabs>
 </template>
 <style lang="less">
+// TODO: 拖拽时前后content样式问题
 // tabs样式重置
 .dark-tabs-card.dark-tabs-top,
 .light-tabs-card.light-tabs-top {

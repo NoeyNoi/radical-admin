@@ -8,7 +8,7 @@ export function initAffixTabs(): string[] {
   const tabStore = useMultipleTab()
   const router = useRouter()
   /**
-   * @description: Filter all fixed routes
+   * @description: 过滤添加了fixed的路由
    */
   function filterAffixTabs(routes: RouteLocationNormalized[]) {
     const tabs: RouteLocationNormalized[] = []
@@ -22,7 +22,7 @@ export function initAffixTabs(): string[] {
   }
 
   /**
-   * @description: Set fixed tabs
+   * @description: 设置 fixed tabs
    */
   async function addAffixTabs(): Promise<void> {
     const affixTabs = filterAffixTabs(

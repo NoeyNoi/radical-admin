@@ -17,8 +17,6 @@ export interface Menu {
   icon?: string
   // 菜单路径
   path: string
-  // 路径参数
-  paramPath?: string
   // 是否禁用
   disabled?: boolean
   // 子菜单
@@ -31,9 +29,4 @@ export interface Menu {
   hideMenu?: boolean
   label?: Node | JSX.Element | string
   key?: string | number | Symbol
-}
-
-export interface MenuModule {
-  orderNo?: number
-  menu: Menu
 }
