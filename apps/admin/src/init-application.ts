@@ -4,7 +4,7 @@ import { initRequest } from '@radical/request'
 import { deepMerge, getGlobalConfig } from '@radical/utils'
 import { initLayout } from '@radical/layouts'
 import { initStores } from '@radical/stores'
-import { useRedo } from '@radical/hooks'
+import { useRedo, useGo } from '@radical/hooks'
 import { useUserStore } from '@/store/user'
 import { useConfigStoreWithOut } from '@radical/stores'
 import { projectSetting, darkMode } from './setting'
@@ -31,6 +31,7 @@ async function initPackages() {
       projectSetting,
       darkMode,
       useRedo,
+      useGo
     }))
   }
   // 初始化layout

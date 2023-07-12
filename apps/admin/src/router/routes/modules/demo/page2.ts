@@ -6,9 +6,9 @@ const Page2: RouteRecordItem = {
   component: LAYOUT,
   redirect: '/pageTest2/test2',
   meta: {
-    orderNo: 4,
+    orderNo: 5,
     title: '一级路由',
-    icon: 'tabler:frame-off',
+    icon: 'icon-park-solid:one-key',
     hideChildrenInMenu: true,
   },
   children: [

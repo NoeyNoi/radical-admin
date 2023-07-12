@@ -16,7 +16,6 @@ const dashboard: RouteRecordItem = {
       name: 'Analysis',
       component: () => import('@/pages/dashboard/analysis/index.vue'),
       meta: {
-        icon: 'mdi:monitor-dashboard',
         title: 'routes.dashboard.analysis',
         affix: true,
       },

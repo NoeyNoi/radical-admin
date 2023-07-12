@@ -11,18 +11,12 @@ import type {
   Router,
 } from 'vue-router'
 import { getRawRoute, RemovableRef } from '@radical/utils'
-import { useRouter } from 'vue-router'
 import { context } from '../../bridge'
 
 function handleGotoPage(router: Router) {
+  const { useGo } = context
   const go = useGo(router)
   go(unref(router.currentRoute).path, true)
-}
-
-export interface MultipleTabState {
-  cacheTabList: Set<string>
-  tabList: RouteLocationNormalized[] | RemovableRef<RouteLocationNormalized[]>
-  lastDragEndIndex: number
 }
 
 const getToTarget = (tabItem: RouteLocationNormalized) => {
@@ -34,21 +28,11 @@ const getToTarget = (tabItem: RouteLocationNormalized) => {
   }
 }
 
-export function useGo(_router?: Router) {
-  const { push, replace } = _router || useRouter()
-  function go(opt: string, isReplace = false) {
-    if (!opt) {
-      return
-    }
-    isReplace ? replace(opt).catch(handleError) : push(opt).catch(handleError)
-  }
-  return go
+export interface MultipleTabState {
+  cacheTabList: Set<string>
+  tabList: RouteLocationNormalized[] | RemovableRef<RouteLocationNormalized[]>
+  lastDragEndIndex: number
 }
-
-function handleError(e: Error) {
-  console.error(e)
-}
-
 export const useMultipleTab = defineStore({
   id: 'APP_MULTIPLE_TABS',
   state: (): MultipleTabState => ({
@@ -75,7 +59,6 @@ export const useMultipleTab = defineStore({
      */
     async updateCacheTab() {
       const cacheMap: Set<string> = new Set()
-
       for (const tab of this.tabList) {
         const item = getRawRoute(tab)
         // 根据ignoreKeepAlive配置忽略对应的缓存
@@ -88,7 +71,6 @@ export const useMultipleTab = defineStore({
       }
       this.cacheTabList = cacheMap
     },
-
     /**
      * 刷新 tabs
      */
@@ -113,6 +95,7 @@ export const useMultipleTab = defineStore({
       this.clearCacheTabs()
     },
     goToPage(router: Router) {
+      const { useGo } = context
       const go = useGo(router)
       const len = this.tabList.length
       const { path } = unref(router.currentRoute)
@@ -126,13 +109,12 @@ export const useMultipleTab = defineStore({
           toPath = p
         }
       }
-      // Jump to the current page and report an error
       path !== toPath && go(toPath, true)
     },
+    // 检查页面是否需要添加到tabs中
     async checkTab(route: RouteLocationNormalized) {
-      // await router.isReady()
       const { path, name, meta } = getRawRoute(route)
-      // 404  The page does not need to add a tab
+      // 404页面不需要添加到tab
       if (
         [PageEnum.ERROR_PAGE, PageEnum.BASE_LOGIN].includes(path as PageEnum) ||
         meta?.hideTab ||
@@ -143,16 +125,16 @@ export const useMultipleTab = defineStore({
       }
       await this.addTab(route)
     },
+    // 添加到tab
     async addTab(route: RouteLocationNormalized) {
       const { path, fullPath, params, query, meta } = getRawRoute(route)
-
       let updateIndex = -1
       // 已存在的页面则不重复添加
       const tabHasExits = this.tabList.some((tab, index) => {
         updateIndex = index
         return (tab.fullPath || tab.path) === (fullPath || path)
       })
-      // 页面存在则更新
+      // 存在则更新
       if (tabHasExits) {
         const curTab = toRaw(this.tabList)[updateIndex]
         if (!curTab) {
@@ -161,15 +143,14 @@ export const useMultipleTab = defineStore({
         curTab.params = params || curTab.params
         curTab.query = query || curTab.query
         curTab.fullPath = fullPath || curTab.fullPath
+        // 替换原有的tab
         this.tabList.splice(updateIndex, 1, curTab)
       } else {
-        // Add tab
         // 获取动态路由打开数，超过 0 即代表需要控制打开数
         const dynamicLevel = meta.dynamicLevel ?? -1
         if (dynamicLevel > 0) {
           // 如果动态路由层级大于 0 了，那么就要限制该路由的打开数限制了
-          // 首先获取到真实的路由，使用配置方式减少计算开销.
-          // const realName: string = path.match(/(\S*)\//)![1];
+          // !首先获取到真实的路由，使用配置方式减少计算开销
           const realPath = meta.realPath ?? ''
           // 获取到已经打开的动态路由数, 判断是否大于某一个值
           if (
@@ -186,9 +167,8 @@ export const useMultipleTab = defineStore({
         this.tabList.push(route)
       }
       await this.updateCacheTab()
-      // cacheTab && Persistent.setLocal(MULTIPLE_TABS_KEY, this.tabList)
     },
-
+    // 关闭选中的tab
     async closeTab(tab: RouteLocationNormalized, router: Router) {
       const close = (route: RouteLocationNormalized) => {
         // @ts-ignore
@@ -203,83 +183,35 @@ export const useMultipleTab = defineStore({
       }
 
       const { currentRoute, replace } = router
-
       const { path } = unref(currentRoute)
+      // 非active的tab直接关闭
       if (path !== tab.path) {
-        // Closed is not the activation tab
         close(tab)
         return
       }
-
-      // Closed is activated atb
+      // 关闭 active tab
       let toTarget: RouteLocationRaw = {}
-
       const index = this.tabList.findIndex((item) => item.path === path)
-
-      // If the current is the leftmost tab
+      // 如果当前是最左边的选项卡
       if (index === 0) {
-        // There is only one tab, then jump to the homepage, otherwise jump to the right tab
+        // 只有一个选项卡，则跳转到主页，否则跳转到右侧选项卡
         if (this.tabList.length === 1) {
-          // const userStore = useUserStore()
-          // toTarget = userStore.getUserInfo?.homePath || PageEnum.BASE_HOME
           toTarget = PageEnum.BASE_HOME
         } else {
-          //  Jump to the right tab
           const page = this.tabList[index + 1]
           toTarget = getToTarget(page)
         }
       } else {
-        // Close the current tab
+        // 跳转到左侧选项卡
         const page = this.tabList[index - 1]
         toTarget = getToTarget(page)
       }
       close(currentRoute.value)
       await replace(toTarget)
     },
-
-    // Close according to key
-    async closeTabByKey(key: string, router: Router) {
-      const index = this.tabList.findIndex(
-        (item) => (item.fullPath || item.path) === key,
-      )
-      if (index !== -1) {
-        await this.closeTab(this.tabList[index], router)
-        const { currentRoute, replace } = router
-        // 检查当前路由是否存在于tabList中
-        const isActivated = this.tabList.findIndex((item) => {
-          return item.fullPath === currentRoute.value.fullPath
-        })
-        // 如果当前路由不存在于TabList中，尝试切换到其它路由
-        if (isActivated === -1) {
-          let pageIndex
-          if (index > 0) {
-            pageIndex = index - 1
-          } else if (index < this.tabList.length - 1) {
-            pageIndex = index + 1
-          } else {
-            pageIndex = -1
-          }
-          if (pageIndex >= 0) {
-            const page = this.tabList[index - 1]
-            const toTarget = getToTarget(page)
-            await replace(toTarget)
-          }
-        }
-      }
-    },
-
-    // Sort the tabs
-    async sortTabs(oldIndex: number, newIndex: number) {
-      const currentTab = this.tabList[oldIndex]
-      this.tabList.splice(oldIndex, 1)
-      this.tabList.splice(newIndex, 0, currentTab)
-      this.lastDragEndIndex = this.lastDragEndIndex + 1
-    },
-
-    // Close the tab on the right and jump
+    // 关闭当前tab左侧非affix的tab
     async closeLeftTabs(route: RouteLocationNormalized, router: Router) {
       const index = this.tabList.findIndex((item) => item.path === route.path)
-
       if (index > 0) {
         const leftTabs = this.tabList.slice(0, index)
         const pathList: string[] = []
@@ -294,16 +226,13 @@ export const useMultipleTab = defineStore({
       this.updateCacheTab()
       handleGotoPage(router)
     },
-
-    // Close the tab on the left and jump
+    // 关闭当前tab右侧非affix的tab
     async closeRightTabs(route: RouteLocationNormalized, router: Router) {
       const index = this.tabList.findIndex(
         (item) => item.fullPath === route.fullPath,
       )
-
       if (index >= 0 && index < this.tabList.length - 1) {
         const rightTabs = this.tabList.slice(index + 1, this.tabList.length)
-
         const pathList: string[] = []
         for (const item of rightTabs) {
           const affix = item?.meta?.affix ?? false
@@ -316,21 +245,17 @@ export const useMultipleTab = defineStore({
       this.updateCacheTab()
       handleGotoPage(router)
     },
-
     async closeAllTab(router: Router) {
       this.tabList = this.tabList.filter((item) => item?.meta?.affix ?? false)
       this.clearCacheTabs()
       this.goToPage(router)
     },
-
     /**
-     * Close other tabs
+     * 关闭其他tabs
      */
     async closeOtherTabs(route: RouteLocationNormalized, router: Router) {
       const closePathList = this.tabList.map((item) => item.fullPath)
-
       const pathList: string[] = []
-
       for (const path of closePathList) {
         if (path !== route.fullPath) {
           const closeItem = this.tabList.find((item) => item.path === path)
@@ -347,34 +272,21 @@ export const useMultipleTab = defineStore({
       this.updateCacheTab()
       handleGotoPage(router)
     },
-
     /**
-     * Close tabs in bulk
+     * 批量关闭选项卡
      */
     async bulkCloseTabs(pathList: string[]) {
       this.tabList = this.tabList.filter(
         (item) => !pathList.includes(item.fullPath),
       )
     },
-
     /**
-     * Set tab's title
+     * 设置tab标题
      */
     async setTabTitle(title: string, route: RouteLocationNormalized) {
       const findTab = this.getTabList.find((item) => item === route)
       if (findTab) {
         findTab.meta.title = title
-        await this.updateCacheTab()
-      }
-    },
-    /**
-     * replace tab's path
-     * **/
-    async updateTabPath(fullPath: string, route: RouteLocationNormalized) {
-      const findTab = this.getTabList.find((item) => item === route)
-      if (findTab) {
-        findTab.fullPath = fullPath
-        findTab.path = fullPath
         await this.updateCacheTab()
       }
     },

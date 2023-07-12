@@ -11,7 +11,7 @@ const MultiLevel: RouteRecordItem = {
   meta: {
     orderNo: 4,
     title: '多级路由',
-    icon: 'tabler:frame-off',
+    icon: 'tabler:menu-deep',
   },
   children: [
     {

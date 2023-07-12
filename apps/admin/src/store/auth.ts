@@ -45,7 +45,6 @@ export const useAuthStore = defineStore('app-auth-store', {
       this.lastBuildMenuTime = 0
     },
     async buildRoutesAction(): Promise<RouteRecordItem[]> {
-      // const { t } = useI18n()
       const configStore = useConfigStoreWithOut()
       const userStore = useUserStore()
 

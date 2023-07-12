@@ -34,7 +34,6 @@ listenerRouteChange((route) => {
   if (name === REDIRECT_NAME || !route) {
     return
   }
-
   const { path, fullPath, meta = {} } = route
   const { currentActiveMenu, hideTab } = meta as RouteMeta
   const isHide = !hideTab ? null : currentActiveMenu
@@ -101,7 +100,7 @@ const handleClose = (e: PointerEvent, route: RouteLocationNormalized) => {
     >
       <template #tab>
         <div
-          class="group hover:text-[var(--n-tab-text-color-active)] hover:pr-10px"
+          class="group hover:pr-10px"
           :class="{ 'pr-10px': activeTabName === item.fullPath }"
         >
           <span>{{ t(item.meta.title) }}</span>

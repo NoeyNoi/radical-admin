@@ -37,15 +37,6 @@ export function useTabs(_router?: Router) {
     await tabStore.setTabTitle(title, targetTab)
   }
 
-  async function updateTabPath(path: string, tab?: RouteLocationNormalized) {
-    const canIUse = canIUseTabs()
-    if (!canIUse) {
-      return
-    }
-    const targetTab = tab || getCurrentTab()
-    await tabStore.updateTabPath(path, targetTab)
-  }
-
   async function handleTabAction(
     action: TabActionEnum,
     tab?: RouteLocationNormalized,
@@ -94,8 +85,6 @@ export function useTabs(_router?: Router) {
     close: (tab?: RouteLocationNormalized) =>
       handleTabAction(TabActionEnum.CLOSE, tab),
     setTitle: (title: string, tab?: RouteLocationNormalized) =>
-      updateTabTitle(title, tab),
-    updatePath: (fullPath: string, tab?: RouteLocationNormalized) =>
-      updateTabPath(fullPath, tab),
+      updateTabTitle(title, tab)
   }
 }

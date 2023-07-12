@@ -5,6 +5,7 @@ export interface ContextOptions {
   projectSetting: ProjectConfig
   darkMode: ThemeEnum
   useRedo: Function
+  useGo: Function
 }
 
 export let context: ContextOptions

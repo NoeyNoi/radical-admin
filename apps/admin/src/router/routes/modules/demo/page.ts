@@ -3,7 +3,7 @@ const Page: RouteRecordItem = {
   name: 'PageTest',
   component: () => import('@/pages/demo/page/index.vue'),
   meta: {
-    orderNo: 4,
+    orderNo: 6,
     title: '非框架页面',
     icon: 'tabler:frame-off',
     hideTab: true,

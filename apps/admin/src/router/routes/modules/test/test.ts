@@ -6,7 +6,7 @@ const test: RouteRecordItem = {
   component: LAYOUT,
   redirect: '/test/test',
   meta: {
-    orderNo: 1,
+    orderNo: 7,
     icon: 'ph:code-bold',
     title: '测试',
   },

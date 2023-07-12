@@ -10,7 +10,7 @@ export type PathAsPageEnum<T> = T extends { path: string }
 export type RouteLocationRawEx = PathAsPageEnum<RouteLocationRaw>
 
 function handleError(e: Error) {
-  console.error(e)
+  console.error(`页面跳转错误：${e}`)
 }
 
 /**
@@ -28,7 +28,7 @@ export function useGo(_router?: Router) {
 }
 
 /**
- * @description: 页面刷新
+ * 页面刷新
  */
 export const useRedo = (_router?: Router) => {
   const { push, currentRoute } = _router || useRouter()

@@ -37,7 +37,6 @@ const dashboard: RouteRecordItem = {
         },
       ],
     },
-
     {
       path: 'form',
       name: 'Form',
