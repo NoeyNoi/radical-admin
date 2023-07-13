@@ -164,3 +164,7 @@ sudo pnpm dev
 ├─.github #github工作流相关
 ```
 
+## 业务开发
+[apps/admin](https://github.com/NoeyNoi/radical-admin/tree/main/apps/admin) 仅作为示例项目，项目内会包含各种示例、功能，也会随时更新
+
+真实的业务开发，可以复制 `admin` 项目并重命名相关配置即可，如 `package.json`中的 `name`字段

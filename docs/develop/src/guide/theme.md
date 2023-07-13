@@ -1,7 +1,7 @@
 ---
-title: 主题样式
+title: 主题及样式
 icon: fluent:dark-theme-20-filled
-order: 6
+order: 7
 category:
   - 使用指南
 ---

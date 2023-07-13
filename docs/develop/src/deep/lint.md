@@ -1,10 +1,9 @@
 ---
-title: 图标
+title: 项目规范
 icon: arcticons:imgur
-order: 1
+order: 5
 category:
   - 深入
 ---
 
 ## 简介
-
