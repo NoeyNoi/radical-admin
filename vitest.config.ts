@@ -11,7 +11,7 @@ export default defineConfig({
   // test: {
   //   environment: 'jsdom',
   //   deps: {
-  //     inline: ['@vue', '@vueuse', 'vue-demi'],
+  //     inline: ['@vue', '@vueuse'],
   //   },
   // },
   resolve: {

@@ -18,6 +18,7 @@
   "scripts": {
     "bootstrap": "pnpm install --registry=https://registry.npmmirror.com/",
     "build": "pnpm --filter scripts build",
+    "preview": "pnpm --filter scripts preview",
     "docs:build": "pnpm --filter @docs/develop build",
     "report": "pnpm --filter scripts report",
     "clean": "pnpm turbo run clean && rimraf node_modules",

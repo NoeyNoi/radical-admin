@@ -1,11 +1,6 @@
 import type { Ref, ShallowRef, UnwrapRef } from 'vue'
 import { effectScope, ref, shallowRef, unref, watch } from 'vue'
-import {
-  isEqual,
-  containsProp,
-  tryOnBeforeUnmount,
-  useDebounceFn,
-} from '@radical/utils'
+import { isEqual, tryOnBeforeUnmount, useDebounceFn } from '@radical/utils'
 
 export interface UsePromiseConfig {
   /**
@@ -44,13 +39,17 @@ export interface UsePromiseReturnType<T> {
 }
 
 function isUsePromiseConfig(obj: object): obj is UsePromiseConfig {
-  return containsProp(
-    obj,
-    'immediate',
-    'redo',
-    'debounce',
-    'ignoreLoading',
-    'throwOnFailed',
+  return (
+    obj &&
+    Object.keys(obj).some((item) =>
+      [
+        'immediate',
+        'redo',
+        'debounce',
+        'ignoreLoading',
+        'throwOnFailed',
+      ].includes(item),
+    )
   )
 }
 

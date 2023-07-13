@@ -31,7 +31,7 @@ async function initPackages() {
       projectSetting,
       darkMode,
       useRedo,
-      useGo
+      useGo,
     }))
   }
   // 初始化layout

@@ -85,6 +85,6 @@ export function useTabs(_router?: Router) {
     close: (tab?: RouteLocationNormalized) =>
       handleTabAction(TabActionEnum.CLOSE, tab),
     setTitle: (title: string, tab?: RouteLocationNormalized) =>
-      updateTabTitle(title, tab)
+      updateTabTitle(title, tab),
   }
 }

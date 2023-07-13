@@ -3,7 +3,7 @@ import { Button } from 'ant-design-vue'
 import { useGo } from '@radical/hooks'
 
 const go = useGo()
-const  handleDetail = () => {
+const handleDetail = () => {
   const time = +new Date()
   go(`/tabs/detail/${time}`)
 }

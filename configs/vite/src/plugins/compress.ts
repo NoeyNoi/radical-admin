@@ -1,7 +1,5 @@
 /**
  * 用于打包和输出gzip。
- * TODO: 请注意，这在Vite中无法正常工作，具体原因仍在调查中
- * @see https://github.com/anncwb/vite-plugin-compression
  */
 import type { PluginOption } from 'vite'
 import compressPlugin from 'vite-plugin-compression'

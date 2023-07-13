@@ -16,7 +16,7 @@ const Dynamic: RouteRecordItem = {
       name: 'Tab',
       component: () => import('@/pages/tabs/Tab.vue'),
       meta: {
-        title: 'Tab'
+        title: 'Tab',
       },
     },
     {
@@ -30,8 +30,8 @@ const Dynamic: RouteRecordItem = {
         dynamicLevel: 3,
         realPath: '/tabs/detail',
       },
-    }
-  ]
+    },
+  ],
 }
 
 export default Dynamic

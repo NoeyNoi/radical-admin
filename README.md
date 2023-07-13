@@ -44,7 +44,7 @@
 - 获取项目代码
 
 ```bash
-git clone https://xxxxxx
+git clone https://github.com/NoeyNoi/radical-admin.git
 ```
 
 - 安装依赖
@@ -87,8 +87,6 @@ pnpm commit
 - `ci` 持续集成
 - `types` 类型定义文件更改
 - `wip` 开发中
-
-### 
 
 ## 相关仓库
 - [vben3](https://github.com/vbenjs/vben3) 本项目已修改，与原项目略有不同，仅作参考
