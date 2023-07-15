@@ -11,7 +11,9 @@
     "stylelint.js"
   ],
   "scripts": {
-    "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo"
+    "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo",
+    "git-cz": "git-cz",
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
     "@commitlint/cli": "^17.4.2",
@@ -19,11 +21,12 @@
     "@typescript-eslint/eslint-plugin": "^5.50.0",
     "@typescript-eslint/parser": "^5.50.0",
     "commitizen": "^4.3.0",
+    "cz-git": "^1.7.0",
     "eslint": "^8.33.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.9.0",
-    "lint-staged": "13.1.0",
+    "lint-staged": "13.2.2",
     "postcss": "^8.4.21",
     "postcss-html": "^1.5.0",
     "postcss-less": "^6.0.0",
