@@ -1,9 +1,4 @@
-<script lang="ts">
-export default {
-  name: 'Iconify',
-}
-</script>
-<script setup lang="ts" name="VbenIconify">
+<script setup lang="ts" name="Iconify">
 import type { PropType, CSSProperties } from 'vue'
 import { unref, computed, useAttrs, ref, nextTick, watch, onMounted } from 'vue'
 import { createNamespace, isString } from '@radical/utils'

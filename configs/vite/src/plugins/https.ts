@@ -1,5 +1,4 @@
 /**
- * Vite Plugin for Enable https and http2
  * 用于启用 https 和 http2 的 Vite 插件
  * @see https://github.com/swandir/vite-plugin-http2-proxy
  * @see https://github.com/liuweiGL/vite-plugin-mkcert
@@ -22,7 +21,7 @@ interface H2ProxyOptions {
 }
 
 /**
- * Generate proxy
+ * 代理
  * @param list
  */
 function createH2Proxy(list: ProxyList = []) {

@@ -4,7 +4,7 @@ import * as ImportComps from './bathImport'
 import './style/theme.less'
 
 /**
- * 参靠文档
+ * 参考文档
  * createForm：https://core.formilyjs.org/zh-CN/api/entry/create-form
  * schema：https://vue.formilyjs.org/api/shared/schema.html#schema
  * form实例：https://core.formilyjs.org/zh-CN/api/models/form
