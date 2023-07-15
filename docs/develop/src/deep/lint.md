@@ -1,12 +1,24 @@
 ---
 title: 项目规范
 icon: simple-icons:sonarlint
-order: 5
+order: 4
 category:
   - 深入
 ---
 
-## 介绍
+## 提交代码
+项目中使用 `husky` 校验提交信息是否规范，提交代码只需执行如下命令，然后根据提示填写必要信息即可
+
+```shell
+pnpm commit
+```
+::: warning 令人烦恼的
+部分机器可能会出现无法执行交互填写，参考[https://github.com/Zhengqbbb/cz-git/issues/87](https://github.com/Zhengqbbb/cz-git/issues/87)
+
+此时只能使用其他方式进行提交，但建议严格遵循[提交规范](./lint.md#git-提交规范)
+:::
+
+## lint
 
 ::: tip 使用 lint 的好处
 
