@@ -80,9 +80,13 @@ pnpm i
 ```bash
 "scripts": {
   # 安装依赖
-  "bootstrap": "pnpm install",
+  "bootstrap": "pnpm install --registry=https://registry.npmmirror.com/",
   # 构建项目
   "build": "pnpm --filter scripts build",
+  # 项目打包预览
+  "preview": "pnpm --filter scripts preview",
+  # 开发文档打包
+  "docs:build": "pnpm --filter @docs/develop build",
   # 构建分析，在 `Mac OS` 电脑上执行完成后会自动打开界面，在 `Window` 电脑上执行完成后需要打开 `./build/.cache/stats.html` 查看
   "report": "pnpm --filter scripts report",
   # 删除 node_modules
@@ -111,7 +115,13 @@ pnpm i
   # 预览，依赖turbo.json配置
   "turbo:preview": "turbo run preview --parallel",
   # 限制开发的时候，必须使用pnpm
-  "preinstall": "npx only-allow pnpm"
+  "preinstall": "npx only-allow pnpm",
+  # husky 命令，无需关心
+  "prepare": "husky install",
+  # 代码提交
+  "commit": "git add . & pnpm --filter @config/lint git-cz",
+  # lint-staged，用于校验提交信息
+  "lint:lint-staged": "pnpm --filter @config/lint lint-staged"
 }
 ```
 
