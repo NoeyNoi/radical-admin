@@ -4,6 +4,12 @@
 
 后台模板工程
 
+## 在线预览
+部署基于vercel，可能需要科学上网
+
+开发文档：https://radical-admin-develop.vercel.app/?vercelToolbarCode=zuIcGXSvlHjDo26
+admin预览：https://radical-admin-one.vercel.app/?vercelToolbarCode=Zw3v3yMNyi7rHBu#/dashboard/analysis
+
 ## 准备
 
 - [node](http://nodejs.org/) 和 [git](https://git-scm.com/) -项目开发环境
