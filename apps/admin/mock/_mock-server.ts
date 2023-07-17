@@ -7,10 +7,11 @@ Object.keys(modules).forEach((key) => {
   if (key.includes('/_')) {
     return
   }
+  // @ts-ignore
   mockModules.push(...modules[key].default)
 })
 
 /**
- * Used in a production environment. Need to manually import all modules
+ * 用于生产环境。需要手动导入所有模块
  */
 export const setupProdMockServer = () => createProdMockServer(mockModules)

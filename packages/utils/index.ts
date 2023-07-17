@@ -20,7 +20,7 @@ export {
   tryOnUnmounted,
   useIntervalFn,
   computedAsync,
-  useTimeoutFn
+  useTimeoutFn,
 } from '@vueuse/core'
 
 export {

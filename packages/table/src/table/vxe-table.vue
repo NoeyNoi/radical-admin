@@ -1,5 +1,9 @@
 <template>
-  <VxeGrid ref="xGrid" v-bind="gridOptions" v-on="gridEvent" />
+  <VxeGrid ref="xGrid" v-bind="gridOptions" v-on="gridEvent">
+    <template #[item]="_props" v-for="item in Object.keys($slots)" :key="item">
+      <slot :name="item" v-bind="_props || {}"></slot>
+    </template>
+  </VxeGrid>
 </template>
 <script lang="ts" setup name="GridTable">
 import { ref, inject, onMounted } from 'vue'

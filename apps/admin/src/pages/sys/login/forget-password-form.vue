@@ -6,7 +6,7 @@ import { useI18n } from '@radical/locale'
 import { useLoginState, LoginStateEnum } from './use-login'
 import { useMessage } from '@radical/hooks'
 import LoginFormTitle from './login-form-title.vue'
-import { sendResetpwdmail } from '@/apis/auth'
+import { sendResetpwdmail } from '@/apis/sys/auth'
 import Extra from './extra'
 
 const { t } = useI18n()

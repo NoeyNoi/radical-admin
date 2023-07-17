@@ -2,7 +2,6 @@
   <AMenu
     class="h-full overflow-y-auto overflow-x-clip"
     :selectedKeys="selectedKeys"
-    :defaultSelectedKeys="defaultSelectedKeys"
     :mode="mode"
     :openKeys="getOpenKeys"
     :inlineIndent="inlineIndent"
@@ -47,12 +46,10 @@ export default defineComponent({
   emits: ['menuClick'],
   setup(props) {
     const menuState = reactive<MenuState>({
-      defaultSelectedKeys: [],
       openKeys: [],
       selectedKeys: [],
       collapsedOpenKeys: [],
     })
-
     const { getCollapsed, getTopMenuAlign } = useMenuSetting()
     const getShowTitle = computed(() => {
       return !unref(getCollapsed)
@@ -114,13 +111,16 @@ export default defineComponent({
         (route || unref(currentRoute)).path
       setOpenKeys(path)
       if (unref(currentActiveMenu)) return
-      if (props.isHorizontal) {
-        const parentPath = await getCurrentParentPath(path)
-        menuState.selectedKeys = [parentPath]
-      } else {
-        const parentPaths = await getAllParentPath(props.items, path)
-        menuState.selectedKeys = parentPaths
-      }
+      // 这里添加setTimeout是为了确保 props传递的值存在
+      setTimeout(async () => {
+        if (props.isHorizontal) {
+          const parentPath = await getCurrentParentPath(path)
+          menuState.selectedKeys = [parentPath]
+        } else {
+          const parentPaths = await getAllParentPath(props.items, path)
+          menuState.selectedKeys = parentPaths
+        }
+      })
     }
 
     return {

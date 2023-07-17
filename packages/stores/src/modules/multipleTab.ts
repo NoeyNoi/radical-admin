@@ -10,7 +10,7 @@ import type {
   RouteLocationRaw,
   Router,
 } from 'vue-router'
-import { getRawRoute, RemovableRef } from '@radical/utils'
+import { getRawRoute } from '@radical/utils'
 import { context } from '../../bridge'
 
 function handleGotoPage(router: Router) {
@@ -30,7 +30,7 @@ const getToTarget = (tabItem: RouteLocationNormalized) => {
 
 export interface MultipleTabState {
   cacheTabList: Set<string>
-  tabList: RouteLocationNormalized[] | RemovableRef<RouteLocationNormalized[]>
+  tabList: RouteLocationNormalized[]
   lastDragEndIndex: number
 }
 export const useMultipleTab = defineStore({

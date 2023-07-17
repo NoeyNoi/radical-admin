@@ -1,7 +1,7 @@
 <template>
   <GridTable :uid="table.uid" :gridOptions="gridOptions" />
 </template>
-<script lang="ts" setup>
+<script lang="ts" setup name="BasicTable">
 import { useTable, GridTable } from '@radical/table'
 
 const table = useTable()

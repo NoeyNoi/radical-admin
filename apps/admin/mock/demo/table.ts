@@ -1,58 +1,251 @@
 import { MockMethod } from 'vite-plugin-mock'
 import { resultSuccess } from '@radical/utils/mock-util'
 
-export function createFakeTableData() {
-  return {
-    items: [
-      {
-        userId: '1',
-        username: 'xxx',
-        realname: 'xxx Admin',
-        avatar: 'https://q1.qlogo.cn/g?b=qq&nk=190848757&s=640',
-        desc: 'manager',
-        password: '123456',
-        accessToken: 'fakeToken1',
-        address: '呼伦贝尔市',
-        startTime: '1997-01-26 10:45:00',
-        endTime: '2022-08-08 17:02:15',
-        roles: [
-          {
-            name: 'Super Admin',
-            value: 'super',
-          },
-        ],
-      },
-      {
-        userId: '2',
-        username: 'test',
-        password: '123456',
-        realname: 'test user',
-        avatar: 'https://q1.qlogo.cn/g?b=qq&nk=339449197&s=640',
-        desc: 'tester',
-        accessToken: 'fakeToken2',
-        address: '鹤壁市',
-        startTime: '2010-07-29 09:23:46	',
-        endTime: '1998-02-27 02:14:58',
-        roles: [
-          {
-            name: 'Tester',
-            value: 'test',
-          },
-        ],
-      },
-    ],
-    total: 2,
+export function createFakeTableData(params) {
+  const list = [
+    {
+      id: 10001,
+      name: 'Test1',
+      nickname: 'T1',
+      role: 'Develop',
+      sex: '1',
+      age: 28,
+      address: 'Shenzhen',
+    },
+    {
+      id: 10002,
+      name: 'Test2',
+      nickname: 'T2',
+      role: 'Test',
+      sex: '0',
+      age: 22,
+      address: 'Guangzhou',
+    },
+    {
+      id: 10003,
+      name: 'Test3',
+      nickname: 'T3',
+      role: 'PM',
+      sex: '1',
+      age: 32,
+      address: 'Shanghai',
+    },
+    {
+      id: 10004,
+      name: 'Test4',
+      nickname: 'T4',
+      role: 'Designer',
+      sex: '0',
+      age: 23,
+      address: 'Shenzhen',
+    },
+    {
+      id: 10005,
+      name: 'Test5',
+      nickname: 'T5',
+      role: 'Develop',
+      sex: '0',
+      age: 30,
+      address: 'Shanghai',
+    },
+    {
+      id: 10006,
+      name: 'Test6',
+      nickname: 'T6',
+      role: 'Develop',
+      sex: '0',
+      age: 27,
+      address: 'Shanghai',
+    },
+    {
+      id: 10007,
+      name: 'Test7',
+      nickname: 'T7',
+      role: 'Develop',
+      sex: '1',
+      age: 29,
+      address: 'Shenzhen',
+    },
+    {
+      id: 10008,
+      name: 'Test8',
+      nickname: 'T8',
+      role: 'Develop',
+      sex: '0',
+      age: 32,
+      address: 'Shanghai',
+    },
+    {
+      id: 10009,
+      name: 'Test9',
+      nickname: 'T9',
+      role: 'Develop',
+      sex: '1',
+      age: 30,
+      address: 'Shenzhen',
+    },
+    {
+      id: 10010,
+      name: 'Test10',
+      nickname: 'T10',
+      role: 'Develop',
+      sex: '0',
+      age: 34,
+      address: 'Shanghai',
+    },
+  ]
+  let filterList: any[] = []
+  if (params?.name) {
+    filterList = list.filter((item) => item.name.includes(params?.name))
   }
+  if (params?.sex) {
+    filterList = list.filter((item) => item.sex.includes(params?.sex))
+  }
+  if (!params?.sex && !params?.name) {
+    filterList = list
+  }
+  return resultSuccess({
+    items: filterList,
+    total: filterList.length,
+  })
 }
 
 export default [
-  // mock user login
   {
-    url: '/api/demo/table',
+    url: '/api/table/business',
     timeout: 200,
     method: 'post',
+    response: ({ body }) => {
+      return createFakeTableData(body)
+    },
+  },
+  {
+    url: '/api/table/proxy',
+    timeout: 200,
+    method: 'get',
     response: () => {
-      return resultSuccess(createFakeTableData())
+      return resultSuccess({
+        items: [
+          {
+            id: 10001,
+            name: 'Test1',
+            nickname: 'T1',
+            role: 'Develop',
+            sex: 'Man',
+            age: 28,
+            address: 'Shenzhen',
+          },
+          {
+            id: 10002,
+            name: 'Test2',
+            nickname: 'T2',
+            role: 'Test',
+            sex: 'Women',
+            age: 22,
+            address: 'Guangzhou',
+          },
+          {
+            id: 10003,
+            name: 'Test3',
+            nickname: 'T3',
+            role: 'PM',
+            sex: 'Man',
+            age: 32,
+            address: 'Shanghai',
+          },
+          {
+            id: 10004,
+            name: 'Test4',
+            nickname: 'T4',
+            role: 'Designer',
+            sex: 'Women',
+            age: 23,
+            address: 'Shenzhen',
+          },
+          {
+            id: 10005,
+            name: 'Test5',
+            nickname: 'T5',
+            role: 'Develop',
+            sex: 'Women',
+            age: 30,
+            address: 'Shanghai',
+          },
+          {
+            id: 10006,
+            name: 'Test6',
+            nickname: 'T6',
+            role: 'Designer',
+            sex: 'Women',
+            age: 21,
+            address: 'Shenzhen',
+          },
+          {
+            id: 10007,
+            name: 'Test7',
+            nickname: 'T7',
+            role: 'Test',
+            sex: 'Man',
+            age: 29,
+            address: 'test abc',
+          },
+          {
+            id: 10008,
+            name: 'Test8',
+            nickname: 'T8',
+            role: 'Develop',
+            sex: 'Man',
+            age: 35,
+            address: 'Shenzhen',
+          },
+          {
+            id: 10009,
+            name: 'Test9',
+            nickname: 'T9',
+            role: 'Develop',
+            sex: 'Man',
+            age: 35,
+            address: 'Shenzhen',
+          },
+          {
+            id: 100010,
+            name: 'Test10',
+            nickname: 'T10',
+            role: 'Develop',
+            sex: 'Man',
+            age: 35,
+            address: 'Guangzhou',
+          },
+          {
+            id: 100011,
+            name: 'Test11',
+            nickname: 'T11',
+            role: 'Test',
+            sex: 'Women',
+            age: 26,
+            address: 'test abc',
+          },
+          {
+            id: 100012,
+            name: 'Test12',
+            nickname: 'T12',
+            role: 'Develop',
+            sex: 'Man',
+            age: 34,
+            address: 'Guangzhou',
+          },
+          {
+            id: 100013,
+            name: 'Test13',
+            nickname: 'T13',
+            role: 'Test',
+            sex: 'Women',
+            age: 22,
+            address: 'Shenzhen',
+          },
+        ],
+        total: 13,
+      })
     },
   },
 ] as MockMethod[]

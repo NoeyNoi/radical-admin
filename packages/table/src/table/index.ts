@@ -1,8 +1,17 @@
 import { reactive, provide, watchEffect } from 'vue'
+import { VxeGridInstance } from 'vxe-table'
 
-const useTable = () => {
+interface RowVO {
+  [key: string]: any
+}
+interface table {
+  uid: Symbol
+  tableRef: VxeGridInstance<RowVO>
+}
+const useTable = (): table => {
   const table = reactive({
     uid: Symbol(),
+    tableRef: {} as VxeGridInstance,
   })
 
   const setTable = (obj: object) => Object.assign(table, obj)

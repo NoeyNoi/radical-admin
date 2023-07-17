@@ -82,7 +82,7 @@ export async function createViteConfig(
       },
     },
     optimizeDeps: {
-      include: ['dayjs/locale/en', 'dayjs/locale/zh-cn', '@iconify/iconify']
+      include: ['dayjs/locale/en', 'dayjs/locale/zh-cn', '@iconify/iconify'],
     },
     plugins: await configVitePlugins(root, viteEnv, command === 'build'),
   }

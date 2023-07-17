@@ -12,6 +12,7 @@ export default {
     demo: '演示',
     card: '卡片',
     form: '表单',
+    business: '业务示例',
     table: {
       table: '表格',
       basic: '基础表格',

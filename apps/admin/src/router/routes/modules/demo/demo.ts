@@ -46,6 +46,14 @@ const dashboard: RouteRecordItem = {
         // ignoreKeepAlive: true,
       },
     },
+    {
+      path: 'business',
+      name: 'Business',
+      component: () => import('@/pages/demo/business/Index.vue'),
+      meta: {
+        title: 'routes.demo.business',
+      },
+    },
   ],
 }
 

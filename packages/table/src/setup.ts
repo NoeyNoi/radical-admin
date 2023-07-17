@@ -34,7 +34,7 @@ import {
   // Optgroup,
   // Option,
   // Textarea,
-  // Button,
+  Button,
   // Modal,
   // List,
   // Pulldown,
@@ -82,7 +82,7 @@ export function setupTable(app: App) {
     // .use(Optgroup)
     // .use(Option)
     // .use(Textarea)
-    // .use(Button)
+    .use(Button)
     // .use(Modal)
     // .use(List)
     // .use(Pulldown)

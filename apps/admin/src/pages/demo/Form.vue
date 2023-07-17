@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script lang="ts" setup name="Form">
 import { useFormilyForm } from '@radical/formily'
 
 const schema = {

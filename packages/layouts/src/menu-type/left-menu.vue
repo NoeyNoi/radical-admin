@@ -28,7 +28,6 @@ const { getDarkMode } = storeToRefs(useConfigStore())
 </script>
 
 <template>
-  <!-- TODO theme 根据主题适配 -->
   <Layout has-sider class="h-full">
     <LayoutSider
       :theme="getDarkMode"

@@ -6,7 +6,7 @@ import { useI18n } from '@radical/locale'
 import { useLoginState, LoginStateEnum } from './use-login'
 import { useMessage } from '@radical/hooks'
 import LoginFormTitle from './login-form-title.vue'
-import { register } from '@/apis/auth'
+import { register } from '@/apis/sys/auth'
 
 const { t } = useI18n()
 const { handleBackLogin, getLoginState } = useLoginState()

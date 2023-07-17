@@ -1,8 +1,7 @@
-import type { LoginParams } from '@/apis/auth'
 import { defineStore } from '@radical/stores'
 import { BASIC_HOME_PATH } from '@radical/constants'
 import { router } from '@radical/router'
-import { doLogin } from '@/apis/auth'
+import { doLogin, LoginParams } from '@/apis/sys/auth'
 import { IUserInfo } from '@radical/types'
 
 interface UserState {

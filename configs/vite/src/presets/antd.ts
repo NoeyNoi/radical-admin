@@ -12,7 +12,7 @@ export async function createAntdPreset(): Promise<UserConfig> {
         'dayjs/locale/eu',
         'dayjs/locale/zh-cn',
         // 'lodash-es',
-      ]
+      ],
     },
     build: {
       rollupOptions: {
