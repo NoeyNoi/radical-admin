@@ -34,7 +34,7 @@ export async function configVitePlugins(
     vueJsx(),
     handleImport(),
     // setup语法name处理
-    configVueSetupExtendPlugin()
+    configVueSetupExtendPlugin(),
   ]
 
   // @vitejs/plugin-legacy

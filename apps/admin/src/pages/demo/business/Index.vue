@@ -4,11 +4,16 @@
   </div>
   <GridTable :uid="table.uid" :gridOptions="gridOptions">
     <template #toolbar_buttons>
-      <Button type="primary" @click="openAddModal">新增</Button>
+      <Button type="primary" @click="() => useAdd(handleSubmit)">新增</Button>
     </template>
     <template #operate="{ row }">
       <Space>
-        <Button size="small" type="primary">编辑</Button>
+        <Button
+          size="small"
+          type="primary"
+          @click="() => useEdit(handleSubmit, row)"
+          >编辑</Button
+        >
         <Button size="small">删除</Button>
       </Space>
     </template>
@@ -20,6 +25,8 @@ import { useFormilyForm } from '@radical/formily'
 import { useTable, GridTable } from '@radical/table'
 import { getBusinessData } from '@/apis/demo/table'
 import { queryFormSchema } from './useFormSchema'
+import { useAdd } from './useAddForm'
+import { useEdit } from './useEditForm'
 
 const handleSubmit = async () => {
   table.tableRef.commitProxy('query')
@@ -124,9 +131,5 @@ const gridOptions = {
       },
     },
   },
-}
-
-const openAddModal = () => {
-  console.log('openAddModal')
 }
 </script>

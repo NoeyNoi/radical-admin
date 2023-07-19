@@ -32,3 +32,34 @@ export function getBusinessData(params: BusinessTable) {
     },
   )
 }
+export interface BusinessItem {
+  name: string
+  nickName: string
+  sex: string
+  age: number
+}
+export function addBusinessData(params: BusinessItem) {
+  return request.post(
+    {
+      url: '/table/add',
+      params,
+    },
+    {
+      errorMessageMode: 'message',
+    },
+  )
+}
+export interface EditItem extends BusinessItem {
+  id: number
+}
+export function editBusinessData(params: EditItem) {
+  return request.post(
+    {
+      url: '/table/edit',
+      params,
+    },
+    {
+      errorMessageMode: 'message',
+    },
+  )
+}

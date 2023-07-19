@@ -1,28 +1,35 @@
 // @ts-nocheck
 import { createVNode, render as vueRender, VNode, VNodeProps } from 'vue'
-import { Modal as AntModal, ModalProps } from 'ant-design-vue'
+import { ConfigProvider, Modal as AntModal, ModalProps } from 'ant-design-vue'
+import { useConfigStoreWithOut } from '@radical/stores'
+
 /**
  * @param content：组件
  * @param props：组件属性
  * @param modalConfig：https://3x.antdv.com/components/modal-cn#API
  */
+interface modalConfig extends ModalProps {
+  // jsx 中destroyOnClose无法生效，可通过onClose回调处理相关逻辑
+  onClose?: Function
+}
 interface Param {
-  content: VNode
-  props: VNodeProps
-  modalConfig: ModalProps
+  content: VNode | (() => JSX.Element)
+  props?: VNodeProps
+  modalConfig: modalConfig
 }
 interface returnRes {
   close: Function // 关闭实例
   destroy: Function // 销毁实例
-  update: (modalConfig: ModalProps) => void // 更新实例
+  update: (modalConfig: modalConfig) => void // 更新实例
   [key: string]: any
 }
-export default function useModal({
+export function useModal({
   content,
   props = {},
   modalConfig,
 }: Param): returnRes {
   const container = document.createDocumentFragment()
+  // content部分
   const _contentVnode = createVNode(content, props)
   const metadata = Object.create({
     okText: '确定',
@@ -57,16 +64,27 @@ export default function useModal({
         update({ confirmLoading: false })
       })
   }
+  // tsx 中需要适配主题，因为此时已经没有ant- 之类的样式
+  const { getDarkMode } = useConfigStoreWithOut()
+  const modalVm = createVNode(AntModal, metadata, () => _contentVnode)
+  const vm = createVNode(
+    ConfigProvider,
+    {
+      prefixCls: getDarkMode,
+    },
+    () => modalVm,
+  )
 
-  const vm = createVNode(AntModal, metadata, () => _contentVnode)
   function update(config) {
-    Object.assign(vm.component.props, config)
-    vm.component.update()
+    // 只更新modal实例
+    Object.assign(modalVm.component.props, config)
+    modalVm.component.update()
   }
 
   function close() {
     metadata.visible = false
     update(metadata)
+    metadata?.onClose?.()
   }
 
   function destroy() {

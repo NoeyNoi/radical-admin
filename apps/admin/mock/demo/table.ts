@@ -1,8 +1,8 @@
 import { MockMethod } from 'vite-plugin-mock'
 import { resultSuccess } from '@radical/utils/mock-util'
-
-export function createFakeTableData(params) {
-  const list = [
+import { reactive } from 'vue'
+const data = reactive({
+  list: [
     {
       id: 10001,
       name: 'Test1',
@@ -93,16 +93,34 @@ export function createFakeTableData(params) {
       age: 34,
       address: 'Shanghai',
     },
-  ]
+  ],
+})
+export function createFakeTableData(params, type?: string) {
   let filterList: any[] = []
-  if (params?.name) {
-    filterList = list.filter((item) => item.name.includes(params?.name))
+  if (type === 'add') {
+    data.list.unshift({
+      ...params,
+      id: +new Date(),
+      role: 'xx',
+      address: 'xx',
+    })
+    filterList = data.list
   }
-  if (params?.sex) {
-    filterList = list.filter((item) => item.sex.includes(params?.sex))
+  if (type === 'edit') {
+    const idx = data.list.indexOf(params.id)
+    data.list.splice(idx, 1)
+    data.list.unshift(params)
+    filterList = data.list
   }
-  if (!params?.sex && !params?.name) {
-    filterList = list
+  if (params?.name && params?.sex) {
+    filterList = data.list.filter((item) => item.name.includes(params?.name))
+    filterList = filterList.filter((item) => item.sex.includes(params?.sex))
+  } else if (params?.name) {
+    filterList = data.list.filter((item) => item.name.includes(params?.name))
+  } else if (params?.sex) {
+    filterList = data.list.filter((item) => item.sex.includes(params?.sex))
+  } else {
+    filterList = data.list
   }
   return resultSuccess({
     items: filterList,
@@ -117,6 +135,22 @@ export default [
     method: 'post',
     response: ({ body }) => {
       return createFakeTableData(body)
+    },
+  },
+  {
+    url: '/api/table/add',
+    timeout: 200,
+    method: 'post',
+    response: ({ body }) => {
+      return createFakeTableData(body, 'add')
+    },
+  },
+  {
+    url: '/api/table/edit',
+    timeout: 200,
+    method: 'post',
+    response: ({ body }) => {
+      return createFakeTableData(body, 'edit')
     },
   },
   {
