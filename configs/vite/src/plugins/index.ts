@@ -13,6 +13,7 @@ import { configUnocssPlugin } from './unocss'
 import { createConfigPlugin } from './config'
 import { configHttpsPlugin } from './https'
 import { handleImport } from './antd'
+import { configVueSetupExtendPlugin } from './vueSetupExtend'
 
 export async function configVitePlugins(
   root: string,
@@ -32,6 +33,8 @@ export async function configVitePlugins(
     vue(),
     vueJsx(),
     handleImport(),
+    // setup语法name处理
+    configVueSetupExtendPlugin()
   ]
 
   // @vitejs/plugin-legacy
