@@ -1,13 +1,18 @@
 import { stores, router } from './index'
 import { BASIC_LOGIN_PATH, PageEnum } from '@radical/constants'
+import { useNProgress } from '@radical/hooks'
 
 const LOGIN_PATH = BASIC_LOGIN_PATH
 const whitePathList: string[] = [LOGIN_PATH]
 
+export function createBasicGuard() {
+  router.afterEach((to) => {
+    useNProgress(to.path, 'done')
+  })
+}
 // 权限守卫
 export function createAuthGuard(PAGE_NOT_FOUND_ROUTE) {
   const { authStore } = stores
-  // TODO: 路由切换时弱网环境下页面会切换较慢，待添加路由动画
   router.beforeEach(async (to, from, next) => {
     // 白名单 或 忽略鉴权的路由
     if (whitePathList.includes(to.path as PageEnum) || to.meta.ignoreAuth) {

@@ -438,6 +438,9 @@ importers:
       '@radical/utils':
         specifier: workspace:*
         version: link:../utils
+      nprogress:
+        specifier: ^0.2.0
+        version: 0.2.0
       vue:
         specifier: ^3.2.47
         version: 3.2.47
@@ -533,6 +536,9 @@ importers:
       '@radical/constants':
         specifier: workspace:*
         version: link:../constants
+      '@radical/hooks':
+        specifier: workspace:*
+        version: link:../hooks
       '@radical/locale':
         specifier: workspace:*
         version: link:../locale
@@ -12036,6 +12042,10 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
       path-key: 4.0.0
+
+  /nprogress@0.2.0:
+    resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
+    dev: false
 
   /nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}

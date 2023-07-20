@@ -1,8 +1,8 @@
 import type { RouteLocationRaw, Router } from 'vue-router'
 import { REDIRECT_NAME, PageEnum } from '@radical/constants'
 import { unref } from 'vue'
-
 import { useRouter } from 'vue-router'
+import { useNProgress } from './useNProgress'
 
 export type PathAsPageEnum<T> = T extends { path: string }
   ? T & { path: PageEnum }
@@ -14,7 +14,7 @@ function handleError(e: Error) {
 }
 
 /**
- * 页面切换
+ * 页面切换，推荐所有跳转皆采用该逻辑，原因是这里做了弱网条件下的页面加载进度条，否则可能会有页面假死现象
  */
 export function useGo(_router?: Router) {
   const { push, replace } = _router || useRouter()
@@ -22,6 +22,7 @@ export function useGo(_router?: Router) {
     if (!opt) {
       return
     }
+    useNProgress(opt as string, 'start')
     isReplace ? replace(opt).catch(handleError) : push(opt).catch(handleError)
   }
   return go

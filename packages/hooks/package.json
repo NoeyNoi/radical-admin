@@ -12,6 +12,7 @@
     "@radical/locale": "workspace:*",
     "@radical/stores": "workspace:*",
     "@radical/utils": "workspace:*",
+    "nprogress": "^0.2.0",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"
   },

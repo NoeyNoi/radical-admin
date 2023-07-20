@@ -2,6 +2,7 @@ import { useUserStoreWithout } from '@/store/user'
 import { useAuthStoreWithout } from '@/store/auth'
 import {
   initStoreForGuard,
+  createBasicGuard,
   createAuthGuard,
   createTabsGuard,
 } from '@radical/router'
@@ -16,6 +17,7 @@ async function setupRouteGuard() {
     authStore,
   }
   initStoreForGuard(stores)
+  createBasicGuard()
   createAuthGuard(PAGE_NOT_FOUND_ROUTE)
   createTabsGuard(setRouteChange)
 }
