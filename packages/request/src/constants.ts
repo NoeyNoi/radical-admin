@@ -1,5 +1,5 @@
 /**
- * @description: Request result set
+ * @description: 请求结果
  */
 export enum ResultEnum {
   SUCCESS = 0,
@@ -9,7 +9,7 @@ export enum ResultEnum {
 }
 
 /**
- * @description: request method
+ * @description: 请求方法
  */
 export enum RequestEnum {
   GET = 'GET',

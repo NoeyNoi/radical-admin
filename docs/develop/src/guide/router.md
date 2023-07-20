@@ -303,6 +303,8 @@ export default defineComponent({
 
 ## 页面跳转
 页面跳转建议采用项目提供的 `useGo`
+- 这里做了弱网条件下的页面加载进度条，否则可能会有页面假死现象
+- 方便后续统一做处理逻辑（不使用router.beforeEach是因为这个东西太慢了）
 
 ### 使用方式
 

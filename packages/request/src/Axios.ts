@@ -14,7 +14,7 @@ import { ContentTypeEnum, RequestEnum } from './constants'
 export * from './axiosTransform'
 
 /**
- * @description: axios module
+ * @description: axios 模块
  */
 export class VAxios {
   private axiosInstance: AxiosInstance
@@ -27,7 +27,7 @@ export class VAxios {
   }
 
   /**
-   * @description: Create axios instance
+   * @description: 创建 axios 实例
    */
   private createAxios(config: CreateAxiosOptions): void {
     this.axiosInstance = axios.create(config)
@@ -43,7 +43,7 @@ export class VAxios {
   }
 
   /**
-   * @description: Reconfigure axios
+   * @description: 修改 axios 默认配置
    */
   configAxios(config: CreateAxiosOptions) {
     if (!this.axiosInstance) {
@@ -53,7 +53,7 @@ export class VAxios {
   }
 
   /**
-   * @description: Set general header
+   * @description: 设置通用的 header
    */
   setHeader(headers: any): void {
     if (!this.axiosInstance) {
@@ -63,7 +63,7 @@ export class VAxios {
   }
 
   /**
-   * @description: Interceptor configuration
+   * @description: 拦截器配置
    */
   private setupInterceptors() {
     const transform = this.getTransform()
@@ -79,10 +79,11 @@ export class VAxios {
 
     const axiosCanceler = new AxiosCanceler()
 
-    // Request interceptor configuration processing
+    // 请求拦截器配置处理
     this.axiosInstance.interceptors.request.use(
+      // @ts-ignore
       (config: AxiosRequestConfig) => {
-        // If cancel repeat request is turned on, then cancel repeat request is prohibited
+        // 如果取消重复请求已开启，则禁止取消重复请求
         // @ts-ignore
         const { ignoreCancelToken } = config.requestOptions
         const ignoreCancel =
@@ -99,7 +100,7 @@ export class VAxios {
       undefined,
     )
 
-    // Request interceptor error capture
+    // 请求拦截器错误捕获
     requestInterceptorsCatch &&
       isFunction(requestInterceptorsCatch) &&
       this.axiosInstance.interceptors.request.use(
@@ -107,7 +108,7 @@ export class VAxios {
         requestInterceptorsCatch,
       )
 
-    // Response result interceptor processing
+    // 响应结果拦截器处理
     this.axiosInstance.interceptors.response.use((res: AxiosResponse<any>) => {
       res && axiosCanceler.removePending(res.config)
       if (responseInterceptors && isFunction(responseInterceptors)) {
@@ -116,7 +117,7 @@ export class VAxios {
       return res
     }, undefined)
 
-    // Response result interceptor error capture
+    // 响应结果拦截器错误捕获
     responseInterceptorsCatch &&
       isFunction(responseInterceptorsCatch) &&
       this.axiosInstance.interceptors.response.use(
@@ -125,7 +126,7 @@ export class VAxios {
       )
   }
 
-  // support form-data
+  // 支持 form-data
   supportFormData(config: AxiosRequestConfig) {
     const headers = config.headers || this.options.headers
     const contentType = headers?.['Content-Type'] || headers?.['content-type']

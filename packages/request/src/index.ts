@@ -78,7 +78,7 @@ const transform: AxiosTransform = {
 
   // 请求之前处理config
   beforeRequestHook: (config, options) => {
-    const { apiUrl, joinParamsToUrl, formatDate, joinTime = true } = options
+    const { apiUrl, joinParamsToUrl, formatDate, joinTime = false } = options
 
     if (apiUrl) {
       const _apuUrl = isString(apiUrl)
@@ -184,14 +184,11 @@ export const createAxios = (opt?: Partial<CreateAxiosOptions>) => {
   return new VAxios(
     deepMerge(
       {
-        // See https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#authentication_schemes
+        // 参考 https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#authentication_schemes
         // authentication schemes，e.g: Bearer
         // authenticationScheme: 'Bearer',
         authenticationScheme: '',
         timeout: 10 * 1000,
-        // 基础接口地址
-        // baseURL: globSetting.apiUrl,
-
         headers: { 'Content-Type': ContentTypeEnum.JSON },
         // 如果是form-data格式
         // headers: { 'Content-Type': ContentTypeEnum.FORM_URLENCODED },
@@ -212,7 +209,7 @@ export const createAxios = (opt?: Partial<CreateAxiosOptions>) => {
           // 接口地址
           apiUrl: () => context.apiUrl,
           //  是否加入时间戳
-          joinTime: true,
+          joinTime: false,
           // 忽略重复请求
           ignoreCancelToken: true,
           // 是否携带token
@@ -225,10 +222,3 @@ export const createAxios = (opt?: Partial<CreateAxiosOptions>) => {
 }
 
 export const request = createAxios()
-
-// other api url
-// export const otherHttp = createAxios({
-//   requestOptions: {
-//     apiUrl: 'xxx',
-//   },
-// });

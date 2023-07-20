@@ -10,11 +10,11 @@ export function useNProgress(path: string, action?: 'start' | 'done') {
     loading = true
     return nProgress.start()
   }
-  if(loading && action === 'done') {
+  if (loading && action === 'done') {
     nProgress.done()
     loading = false
   }
-  if(!loaded) {
+  if (!loaded) {
     LOADED_PAGE_POOL.set(path, true)
   }
 }

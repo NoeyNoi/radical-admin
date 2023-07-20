@@ -6,6 +6,15 @@ category:
   - 使用指南
 ---
 
+本项目基于[vben](https://github.com/vbenjs/vue-vben-admin)魔改，如果其能够满足需要，你应该优先使用[vben](https://github.com/vbenjs/vue-vben-admin)
+
+魔改的原因是其不满足笔者对
+- 代码管理方式
+- 技术栈
+- 半低代码
+- ...
+
+等等诉求
 ## 简介
 `Radical Admin`：意为极端的管理后台框架，极端是因为框架内有诸多约定，并且可能是唯一选项，例如只能使用`pnpm`管理依赖，如果你觉得不妥，可以放弃使用，市面上有诸多优秀的后台框架可供选择
 

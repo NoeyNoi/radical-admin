@@ -8,6 +8,7 @@ export function joinTimestamp<T extends boolean>(
   restful: T,
 ): T extends true ? string : object
 
+// 添加时间戳
 export function joinTimestamp(join: boolean, restful = false): string | object {
   if (!join) {
     return restful ? '' : {}
@@ -20,7 +21,7 @@ export function joinTimestamp(join: boolean, restful = false): string | object {
 }
 
 /**
- * @description: Format request parameter time
+ * @description: 格式化请求参数中的时间
  */
 export const formatRequestDate = (params: Recordable<any>) => {
   if (!isObject(params)) {
