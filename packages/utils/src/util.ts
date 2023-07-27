@@ -47,4 +47,4 @@ function isUrl(path: string): boolean {
   return reg.test(path)
 }
 
-export { isUrl, deepMerge, appendUrlParams, openWindow, NOOP }
+export { isUrl, appendUrlParams, openWindow, NOOP }
