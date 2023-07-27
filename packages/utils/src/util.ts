@@ -41,17 +41,6 @@ function appendUrlParams(baseUrl: string, obj: any): string {
     : baseUrl.replace(/\/?$/, '?') + parameters
 }
 
-function deepMerge<T = any>(src: any = {}, target: any = {}): T {
-  let key: string
-  for (key in target) {
-    src[key] =
-      isObject(src[key]) && src[key] !== null
-        ? deepMerge(src[key], target[key])
-        : (src[key] = target[key])
-  }
-  return src
-}
-
 function isUrl(path: string): boolean {
   const reg =
     /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/

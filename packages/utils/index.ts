@@ -39,6 +39,7 @@ export {
   assign as _assign,
   set,
   isNumber,
+  merge as deepMerge,
 } from 'lodash-es'
 
 // @ts-ignore
