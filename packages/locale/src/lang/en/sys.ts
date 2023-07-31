@@ -1,8 +1,6 @@
 export default {
   api: {
-    operationFailed: 'Operation failed',
     errorTip: 'Error Tip',
-    errorMessage: 'The operation failed, the system is abnormal!',
     timeoutMessage: 'Login timed out, please log in again!',
     apiTimeoutMessage:
       'The interface request timed out, please refresh the page and try again!',
@@ -11,8 +9,6 @@ export default {
     networkExceptionMsg:
       'Please check if your network connection is normal! The network is abnormal',
 
-    errMsg401:
-      'The user does not have permission (token, user name, password error)!',
     errMsg403: 'The user is authorized, but access is forbidden!',
     errMsg404: 'Network request error, the resource was not found!',
     errMsg405: 'Network request error, request method not allowed!',
@@ -24,11 +20,6 @@ export default {
       'The service is unavailable, the server is temporarily overloaded or maintained!',
     errMsg504: 'Network timeout!',
     errMsg505: 'The http version does not support the request!',
-  },
-  app: {
-    logoutTip: 'Reminder',
-    logoutMessage: 'Confirm to exit the system?',
-    menuLoading: 'Menu loading...',
   },
   exception: {
     backLogin: 'Back Login',
@@ -43,16 +34,12 @@ export default {
   },
   login: {
     backSignIn: 'Back sign in',
-    mobileSignInFormTitle: 'Mobile sign in',
-    qrSignInFormTitle: 'Qr code sign in',
     signInFormTitle: 'Sign in',
     signUpFormTitle: 'Sign up',
     forgetFormTitle: 'Reset password',
 
-    signInTitle: 'Backstage management system',
-    signInDesc: 'Enter your personal details and get started!',
-    policy: 'I agree to the xxx Privacy Policy',
-    scanSign: `scanning the code to complete the login`,
+    signInTitle: 'Backstage management system for m7s',
+    signInDesc: 'Streaming Media Online Management',
 
     loginButton: 'Sign in',
     registerButton: 'Sign up',
@@ -63,20 +50,19 @@ export default {
     // notify
     loginSuccessTitle: 'Login successful',
     loginSuccessDesc: 'Welcome back',
+    registerSuccessTitle: 'Register successful',
+    registerSuccessDesc: 'About to return to the login page',
+    resetSuccessTitle: 'Reset successful',
+    resetSuccessDesc:
+      'Password reset successful. Please log in to the email to view the password and activate it',
 
     // placeholder
-    accountPlaceholder: 'Please input username',
+    mailPlaceholder: 'Please input mail',
     passwordPlaceholder: 'Please input password',
-    smsPlaceholder: 'Please input sms code',
-    mobilePlaceholder: 'Please input mobile',
-    policyPlaceholder: 'Register after checking',
+    password2Placeholder: 'Please input password again',
+    verifycodePlaceholder: 'Please enter the email verification code',
+    resetPasswordTip:
+      'After clicking on reset password, please go to the binding email to view the reset password and click the link to activate it',
     diffPwd: 'The two passwords are inconsistent',
-
-    userName: 'Username',
-    password: 'Password',
-    confirmPassword: 'Confirm Password',
-    email: 'Email',
-    smsCode: 'SMS code',
-    mobile: 'Mobile',
   },
 }

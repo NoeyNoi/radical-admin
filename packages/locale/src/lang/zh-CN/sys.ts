@@ -1,15 +1,12 @@
 export default {
   api: {
-    operationFailed: '操作失败',
     errorTip: '错误提示',
-    errorMessage: '操作失败,系统异常!',
     timeoutMessage: '登录超时,请重新登录!',
     apiTimeoutMessage: '接口请求超时,请刷新页面重试!',
     apiRequestFailed: '请求出错，请稍候重试',
     networkException: '网络异常',
     networkExceptionMsg: '网络异常，请检查您的网络连接是否正常!',
 
-    errMsg401: '用户没有权限（令牌、用户名、密码错误）!',
     errMsg403: '用户得到授权，但是访问是被禁止的。!',
     errMsg404: '网络请求错误,未找到该资源!',
     errMsg405: '网络请求错误,请求方法未允许!',
@@ -20,11 +17,6 @@ export default {
     errMsg503: '服务不可用，服务器暂时过载或维护!',
     errMsg504: '网络超时!',
     errMsg505: 'http版本不支持该请求!',
-  },
-  app: {
-    logoutTip: '温馨提醒',
-    logoutMessage: '是否确认退出系统?',
-    menuLoading: '菜单加载中...',
   },
   exception: {
     backLogin: '返回登录',
@@ -42,8 +34,8 @@ export default {
     signUpFormTitle: '注册',
     forgetFormTitle: '重置密码',
 
-    signInTitle: '开箱即用的中后台管理系统',
-    signInDesc: '输入您的个人详细信息开始使用！',
+    signInTitle: '开箱即用的 m7s 管理系统',
+    signInDesc: '流媒体在线管理',
 
     loginButton: '登录',
     registerButton: '注册账号',
@@ -54,7 +46,7 @@ export default {
     loginSuccessTitle: '登录成功',
     loginSuccessDesc: '欢迎回来',
     registerSuccessTitle: '注册成功',
-    registerSuccessDesc: '即将进入系统',
+    registerSuccessDesc: '即将返回到登录界面',
     resetSuccessTitle: '重置成功',
     resetSuccessDesc: '重置密码成功，请登录邮箱查看密码，并进行激活',
 
