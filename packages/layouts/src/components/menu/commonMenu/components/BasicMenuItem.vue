@@ -11,3 +11,13 @@ import { itemProps } from '../props'
 
 defineProps(itemProps)
 </script>
+<style lang="less">
+.light-menu-inline-collapsed,
+.dark-menu-inline-collapsed {
+  .light-menu-item,
+  .dark-menu-item {
+    display: flex;
+    align-items: center;
+  }
+}
+</style>
