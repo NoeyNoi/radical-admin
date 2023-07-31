@@ -1,6 +1,10 @@
 <template>
   <MenuItem :key="item.path">
     <MenuItemContent v-bind="$props" :item="item" />
+    <!-- 菜单折叠时展示title -->
+    <template #title v-if="level === 1 && item?.title">
+      {{ item?.title }}
+    </template>
   </MenuItem>
 </template>
 <script lang="ts" setup name="BasicMenuItem">
